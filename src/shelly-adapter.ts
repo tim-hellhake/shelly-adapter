@@ -34,7 +34,8 @@ class ShellyDevice extends Device {
 
         new SwitchProperty(this, 'relay0', (value) => device.setRelay(0, value));
 
-        device.on('change', (prop: any, newValue: any, _oldValue: any) => {
+        device.on('change', (prop: any, newValue: any, oldValue: any) => {
+            console.log(`${prop} changed from ${oldValue} to ${newValue}`);
             const property = this.properties.get(prop);
 
             if (property) {
@@ -84,7 +85,8 @@ class ShellyDimmer extends Device {
             device.setWhite(value, this.switchProperty.value)
         });
 
-        device.on('change', (prop: any, newValue: any, _oldValue: any) => {
+        device.on('change', (prop: any, newValue: any, oldValue: any) => {
+            console.log(`${prop} changed from ${oldValue} to ${newValue}`);
             const property = this.properties.get(prop);
 
             if (property) {
