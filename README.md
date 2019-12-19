@@ -1,6 +1,6 @@
 # Shelly adapter
 
-[![Build Status](https://travis-ci.org/tim-hellhake/shelly-adapter.svg?branch=master)](https://travis-ci.org/tim-hellhake/shelly-adapter)
+[![build](https://github.com/tim-hellhake/esphome-adapter/workflows/Build/badge.svg)](https://github.com/tim-hellhake/esphome-adapter/actions?query=workflow:Build)
 [![dependencies](https://david-dm.org/tim-hellhake/shelly-adapter.svg)](https://david-dm.org/tim-hellhake/shelly-adapter)
 [![devDependencies](https://david-dm.org/tim-hellhake/shelly-adapter/dev-status.svg)](https://david-dm.org/tim-hellhake/shelly-adapter?type=dev)
 [![optionalDependencies](https://david-dm.org/tim-hellhake/shelly-adapter/optional-status.svg)](https://david-dm.org/tim-hellhake/shelly-adapter?type=optional)
