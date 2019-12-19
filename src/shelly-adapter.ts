@@ -39,8 +39,7 @@ class ShellyDevice extends Device {
             const property = this.properties.get(prop);
 
             if (property) {
-                property.setCachedValue(newValue);
-                this.notifyPropertyChanged(property);
+                property.setCachedValueAndNotify(newValue);
             } else {
                 console.warn(`No property for ${prop} found`);
             }
@@ -90,8 +89,7 @@ class ShellyDimmer extends Device {
             const property = this.properties.get(prop);
 
             if (property) {
-                property.setCachedValue(newValue);
-                this.notifyPropertyChanged(property);
+                property.setCachedValueAndNotify(newValue);
             } else {
                 console.warn(`No property for ${prop} found`);
             }
