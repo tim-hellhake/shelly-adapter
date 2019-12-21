@@ -50,8 +50,8 @@ class ShellyDevice extends Device {
 class BrightnessProperty extends Property {
     constructor(device: ShellyDevice, name: string, private onChange: (value: number) => void) {
         super(device, name, {
-            type: 'boolean',
-            '@type': 'OnOffProperty',
+            type: 'number',
+            '@type': 'BrightnessProperty',
             title: 'brightness',
             description: 'The brightness of the dimmer'
         });
