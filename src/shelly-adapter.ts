@@ -18,16 +18,19 @@ export class ShellyAdapter extends Adapter {
         } = manifest.moziot.config;
 
         shellies.on('discover', device => {
-            if (device.relay0 != undefined) {
-                console.log(`Discovered new ${device.constructor.name} with id ${device.id}`);
-                const shelly = new ShellyDevice(this, device);
-                this.handleDeviceAdded(shelly);
-            } else {
-                if (device.constructor.name == 'ShellyDimmer') {
-                    console.log(`Discovered new ${device.constructor.name} with id ${device.id}`);
+            console.log(`Discovered new ${device.constructor.name} with id ${device.id}`);
+
+            switch (device.constructor.name) {
+                case 'ShellyDimmer':
                     const shelly = new ShellyDimmer(this, device);
                     this.handleDeviceAdded(shelly);
-                }
+                    break;
+                default:
+                    if (device.relay0 != undefined) {
+                        const shelly = new ShellyDevice(this, device);
+                        this.handleDeviceAdded(shelly);
+                    }
+                    break;
             }
         })
 
