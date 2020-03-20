@@ -15,8 +15,10 @@ export class SwitchProperty extends Property {
             title: 'State',
             description: 'The state of the switch'
         });
+
         device.properties.set(name, this);
     }
+
     async setValue(value: any): Promise<void> {
         super.setValue(value);
         this.onChange(value);

@@ -12,6 +12,7 @@ declare module 'shellies' {
         public id: string;
         public name: string;
         public relay0: boolean;
+        public internalTemperature?: number;
 
         public on(type: 'change', listener: (prop: string, newValue: any, oldValue: any) => void): void;
         public setRelay(index: number, value: boolean): Promise<void>

@@ -7,6 +7,7 @@
 import { Device } from 'gateway-addon';
 import { Shelly } from 'shellies';
 import { SwitchProperty } from './switch-property';
+import { TemperatureProperty } from './temperature-property';
 
 export class ShellyDevice extends Device {
     constructor(adapter: any, device: Shelly) {
@@ -25,5 +26,10 @@ export class ShellyDevice extends Device {
                 console.warn(`No property for ${prop} found`);
             }
         });
+
+        if (device.internalTemperature) {
+            console.log(`Detected internalTemperature property`);
+            new TemperatureProperty(this, 'internalTemperature');
+        }
     }
 }
