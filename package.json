@@ -35,10 +35,10 @@
     "exec": "{nodeLoader} {path}"
   },
   "dependencies": {
-    "shellies": "^0.15.0"
+    "shellies": "^0.16.0"
   },
   "devDependencies": {
-    "typescript": "^3.7.3",
-    "@types/node": "^12.12.21"
+    "typescript": "^3.8.3",
+    "@types/node": "^13.9.2"
   }
 }
