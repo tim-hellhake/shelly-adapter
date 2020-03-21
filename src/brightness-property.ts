@@ -4,11 +4,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import { Property } from 'gateway-addon';
-import { ShellyDevice } from './shelly-device';
+import { Property, Device } from 'gateway-addon';
 
 export class BrightnessProperty extends Property {
-    constructor(device: ShellyDevice, name: string, private onChange: (value: number) => void) {
+    constructor(device: Device, name: string, private onChange: (value: number) => void) {
         super(device, name, {
             type: 'number',
             '@type': 'BrightnessProperty',
@@ -17,6 +16,7 @@ export class BrightnessProperty extends Property {
         });
         device.properties.set(name, this);
     }
+
     async setValue(value: any): Promise<void> {
         super.setValue(value);
         this.onChange(value);

@@ -4,11 +4,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import { Property } from 'gateway-addon';
-import { ShellyDevice } from "./shelly-device";
+import { Property, Device } from 'gateway-addon';
 
 export class SwitchProperty extends Property {
-    constructor(device: ShellyDevice, name: string, private onChange: (value: boolean) => void) {
+    constructor(device: Device, name: string, private onChange: (value: boolean) => void) {
         super(device, name, {
             type: 'boolean',
             '@type': 'OnOffProperty',

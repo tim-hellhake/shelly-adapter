@@ -23,6 +23,7 @@ declare module 'gateway-addon' {
 
         public properties: Map<String, Property>;
         public notifyPropertyChanged(property: Property): void;
+        public addAction(name: string, metadata: any): void;
     }
 
     class Adapter {

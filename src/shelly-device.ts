@@ -10,12 +10,14 @@ import { SwitchProperty } from './switch-property';
 import { TemperatureProperty } from './temperature-property';
 
 export class ShellyDevice extends Device {
-    constructor(adapter: any, device: Shelly) {
+    private callbacks: { [key: string]: () => void } = {};
+
+    constructor(adapter: any, private device: Shelly) {
         super(adapter, device.id);
         this['@context'] = 'https://iot.mozilla.org/schemas/';
         this['@type'] = ['SmartPlug'];
         this.name = `${device.constructor.name} (${device.id})`;
-        new SwitchProperty(this, 'relay0', (value) => device.setRelay(0, value));
+
         device.on('change', (prop: any, newValue: any, oldValue: any) => {
             console.log(`${prop} changed from ${oldValue} to ${newValue}`);
             const property = this.properties.get(prop);
@@ -27,9 +29,70 @@ export class ShellyDevice extends Device {
             }
         });
 
+        if (device.mode) {
+            switch (device.mode) {
+                case 'relay':
+                    this.configureRelayMode();
+                    break;
+                case 'roller':
+                    this.configureRollerMode();
+                    break;
+                default:
+                    console.warn(`Unknown device mode: ${device.mode}`);
+                    break;
+            }
+        }
+
         if (device.internalTemperature) {
             console.log(`Detected internalTemperature property`);
             new TemperatureProperty(this, 'internalTemperature');
         }
+    }
+
+    addCallbackAction(name: string, description: any, callback: () => void) {
+        this.addAction(name, description);
+        this.callbacks[name] = callback;
+    }
+
+    async performAction(action: any) {
+        action.start();
+
+        const callback = this.callbacks[action.name];
+
+        if (callback != undefined) {
+            console.log(`Executing action ${action.name}`);
+            callback();
+        } else {
+            console.warn(`Unknown action ${action.name}`);
+        }
+
+        action.finish();
+    }
+
+    private configureRelayMode(): void {
+        console.log('Configuring relay mode');
+        new SwitchProperty(this, 'relay0', (value) => this.device.setRelay(0, value));
+    }
+
+    private configureRollerMode(): void {
+        console.log('Configuring roller mode');
+
+        this.addCallbackAction('open', {
+            title: 'Open'
+        }, () => {
+            this.device.setRollerState('open');
+        });
+
+        this.addCallbackAction('stop', {
+            title: 'Stop'
+        }, () => {
+            this.device.setRollerState('stop');
+        });
+
+        this.addCallbackAction('close', {
+            title: 'Close'
+        }, () => {
+            this.device.setRollerState('close');
+        });
     }
 }
