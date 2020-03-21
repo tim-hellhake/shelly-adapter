@@ -1,7 +1,7 @@
 {
   "name": "shelly-adapter",
   "display_name": "Shelly",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Connect your shelly devices",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
