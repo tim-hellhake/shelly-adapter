@@ -45,7 +45,7 @@ export class ShellyDevice extends Device {
 
         if (device.internalTemperature) {
             console.log(`Detected internalTemperature property`);
-            new TemperatureProperty(this, 'internalTemperature');
+            new TemperatureProperty(this, 'internalTemperature', 'Internal temperature');
         }
     }
 

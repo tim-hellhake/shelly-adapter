@@ -8,13 +8,13 @@ import { Property } from 'gateway-addon';
 import { ShellyDevice } from "./shelly-device";
 
 export class TemperatureProperty extends Property {
-    constructor(device: ShellyDevice, name: string) {
+    constructor(device: ShellyDevice, name: string, title: string) {
         super(device, name, {
             '@type': 'TemperatureProperty',
             type: 'number',
             unit: 'degree celsius',
             multipleOf: 0.01,
-            title: 'Temperature',
+            title,
             readOnly: true
         });
 
