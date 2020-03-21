@@ -15,7 +15,7 @@ export class ShellyDevice extends Device {
     constructor(adapter: any, private device: Shelly) {
         super(adapter, device.id);
         this['@context'] = 'https://iot.mozilla.org/schemas/';
-        this['@type'] = ['SmartPlug'];
+        this['@type'] = [];
         this.name = `${device.constructor.name} (${device.id})`;
 
         device.on('change', (prop: any, newValue: any, oldValue: any) => {
@@ -71,6 +71,7 @@ export class ShellyDevice extends Device {
 
     private configureRelayMode(): void {
         console.log('Configuring relay mode');
+        this['@type'].push('SmartPlug');
         new SwitchProperty(this, 'relay0', (value) => this.device.setRelay(0, value));
     }
 
