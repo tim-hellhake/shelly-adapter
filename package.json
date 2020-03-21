@@ -23,8 +23,13 @@
     "LICENSE",
     "SHA256SUMS",
     "manifest.json",
+    "lib/brightness-property.js",
     "lib/index.js",
-    "lib/shelly-adapter.js"
+    "lib/shelly-adapter.js",
+    "lib/shelly-device.js",
+    "lib/shelly-dimmer.js",
+    "lib/switch-property.js",
+    "lib/temperature-property.js"
   ],
   "moziot": {
     "api": {
