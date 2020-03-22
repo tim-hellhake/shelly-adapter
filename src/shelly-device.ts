@@ -41,6 +41,9 @@ export class ShellyDevice extends Device {
                     console.warn(`Unknown device mode: ${device.mode}`);
                     break;
             }
+        } else {
+            console.log('No switch mode found, assuming relay');
+            this.configureRelayMode();
         }
 
         if (device.internalTemperature) {
