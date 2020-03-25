@@ -12,6 +12,7 @@ declare module 'shellies' {
         public id: string;
         public name: string;
         public relay0: boolean;
+        public powerMeter0: boolean;
         public internalTemperature?: number;
         public mode?: 'relay' | 'roller';
         public setRollerState(state: 'open' | 'stop' | 'close', duration?: number): Promise<void>;

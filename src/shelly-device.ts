@@ -8,6 +8,7 @@ import { Device } from 'gateway-addon';
 import { Shelly } from 'shellies';
 import { SwitchProperty } from './switch-property';
 import { TemperatureProperty } from './temperature-property';
+import { PowerProperty } from './power-property';
 
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};
@@ -49,6 +50,11 @@ export class ShellyDevice extends Device {
         if (device.internalTemperature) {
             console.log(`Detected internalTemperature property`);
             new TemperatureProperty(this, 'internalTemperature', 'Internal temperature');
+        }
+
+        if (device.powerMeter0 != undefined) {
+            console.log(`Detected internalTemperature property`);
+            new PowerProperty(this, 'power');
         }
     }
 
