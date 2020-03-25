@@ -3,7 +3,7 @@
   "id": "shelly-adapter",
   "name": "Shelly",
   "short_name": "Shelly",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Connect your shelly devices",
   "homepage_url": "https://github.com/tim-hellhake/shelly-adapter#readme",
   "license": "MPL-2.0",
