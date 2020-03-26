@@ -81,7 +81,14 @@ export class ShellyDevice extends Device {
     private configureRelayMode(): void {
         console.log('Configuring relay mode');
         this['@type'].push('SmartPlug');
-        new SwitchProperty(this, 'relay0', (value) => this.device.setRelay(0, value));
+
+        for (let i = 0; i < 4; i++) {
+            const property = `relay${i}`;
+
+            if ((<any>this.device)[property] != undefined) {
+                new SwitchProperty(this, property, (value) => this.device.setRelay(i, value));
+            }
+        }
     }
 
     private configureRollerMode(): void {

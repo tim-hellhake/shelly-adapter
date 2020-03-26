@@ -26,7 +26,7 @@ export class ShellyAdapter extends Adapter {
                     this.handleDeviceAdded(shelly);
                     break;
                 default:
-                    if (device.relay0 != undefined) {
+                    if ((<any>device)['relay0'] != undefined) {
                         const shelly = new ShellyDevice(this, device);
                         this.handleDeviceAdded(shelly);
                     }
