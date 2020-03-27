@@ -9,6 +9,7 @@ import { Shelly } from 'shellies';
 import { SwitchProperty } from './switch-property';
 import { TemperatureProperty } from './temperature-property';
 import { PowerProperty } from './power-property';
+import { MainPowerProperty } from './main-power-property';
 
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};
@@ -140,14 +141,15 @@ export class ShellyDevice extends Device {
         }
 
         const multiple = powerMeters.length > 1;
+        let mainPowerMeter: MainPowerProperty | undefined;
 
         if (multiple) {
-            new PowerProperty(this, 'powerMeter', 'Power all', true);
+            mainPowerMeter = new MainPowerProperty(this, 'powerMeter', 'Power all');
         }
 
         for (const i of powerMeters) {
             const property = `powerMeter${i}`;
-            new PowerProperty(this, property, `Power ${i}`, !multiple);
+            new PowerProperty(this, property, `Power ${i}`, !multiple, mainPowerMeter);
         }
     }
 }

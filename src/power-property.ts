@@ -5,9 +5,10 @@
  */
 
 import { Property, Device } from 'gateway-addon';
+import { MainPowerProperty } from './main-power-property';
 
 export class PowerProperty extends Property {
-    constructor(device: Device, name: string, title: string, primary: boolean) {
+    constructor(device: Device, name: string, title: string, primary: boolean, private mainPowerMeter?: MainPowerProperty) {
         super(device, name, {
             '@type': primary ? 'InstantaneousPowerProperty' : undefined,
             type: 'number',
@@ -17,5 +18,13 @@ export class PowerProperty extends Property {
         });
 
         device.properties.set(name, this);
+    }
+
+    public setCachedValueAndNotify(value: any) {
+        super.setCachedValueAndNotify(value);
+
+        if (this.mainPowerMeter) {
+            this.mainPowerMeter.setPowerValue(this.name, value);
+        }
     }
 }
