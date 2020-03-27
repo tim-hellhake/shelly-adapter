@@ -5,12 +5,11 @@
  */
 
 import { Property, Device } from 'gateway-addon';
-import { MainSwitchProperty } from './main-switch-property';
 
-export class SwitchProperty extends Property {
-    constructor(device: Device, name: string, title: string, primary: boolean,
-        private onChange: (value: boolean) => void,
-        private mainSwitchProperty?: MainSwitchProperty) {
+export class MainSwitchProperty extends Property {
+    private switchValues: { [key: string]: boolean } = {};
+
+    constructor(device: Device, name: string, title: string, primary: boolean, private onChange: (value: boolean) => void) {
         super(device, name, {
             type: 'boolean',
             '@type': primary ? 'OnOffProperty' : undefined,
@@ -26,11 +25,10 @@ export class SwitchProperty extends Property {
         this.onChange(value);
     }
 
-    public setCachedValueAndNotify(value: any) {
-        super.setCachedValueAndNotify(value);
+    public setSwitchValue(name: string, value: boolean) {
+        this.switchValues[name] = value;
+        const on = Object.values(this.switchValues).filter(x => x);
 
-        if (this.mainSwitchProperty) {
-            this.mainSwitchProperty.setSwitchValue(this.name, value);
-        }
+        this.setCachedValueAndNotify(on.length == Object.keys(this.switchValues).length);
     }
 }

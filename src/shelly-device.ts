@@ -10,6 +10,7 @@ import { SwitchProperty } from './switch-property';
 import { TemperatureProperty } from './temperature-property';
 import { PowerProperty } from './power-property';
 import { MainPowerProperty } from './main-power-property';
+import { MainSwitchProperty } from './main-switch-property';
 
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};
@@ -91,9 +92,10 @@ export class ShellyDevice extends Device {
         }
 
         const multiple = relays.length > 1;
+        let mainSwitchProperty: MainSwitchProperty | undefined;
 
         if (multiple) {
-            new SwitchProperty(this, 'relay', 'All', true, (value) => {
+            mainSwitchProperty = new MainSwitchProperty(this, 'relay', 'All', true, (value) => {
                 for (const i of relays) {
                     this.device.setRelay(i, value);
                 }
@@ -102,7 +104,7 @@ export class ShellyDevice extends Device {
 
         for (const i of relays) {
             const property = `relay${i}`;
-            new SwitchProperty(this, property, `Relay ${i}`, !multiple, (value) => this.device.setRelay(i, value));
+            new SwitchProperty(this, property, `Relay ${i}`, !multiple, (value) => this.device.setRelay(i, value), mainSwitchProperty);
         }
     }
 
