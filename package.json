@@ -26,6 +26,7 @@
     "lib/brightness-property.js",
     "lib/index.js",
     "lib/main-power-property.js",
+    "lib/main-switch-property.js",
     "lib/power-property.js",
     "lib/shelly-adapter.js",
     "lib/shelly-device.js",
