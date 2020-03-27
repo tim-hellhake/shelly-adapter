@@ -7,11 +7,11 @@
 import { Property, Device } from 'gateway-addon';
 
 export class SwitchProperty extends Property {
-    constructor(device: Device, name: string, private onChange: (value: boolean) => void) {
+    constructor(device: Device, name: string, title: string, primary: boolean, private onChange: (value: boolean) => void) {
         super(device, name, {
             type: 'boolean',
-            '@type': 'OnOffProperty',
-            title: 'State',
+            '@type': primary ? 'OnOffProperty' : undefined,
+            title,
             description: 'The state of the switch'
         });
 

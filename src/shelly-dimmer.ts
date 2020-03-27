@@ -17,7 +17,7 @@ export class ShellyDimmer extends Device {
         this['@context'] = 'https://iot.mozilla.org/schemas/';
         this['@type'] = ['Light'];
         this.name = `${device.constructor.name} (${device.id})`;
-        this.switchProperty = new SwitchProperty(this, 'switch', (value) => {
+        this.switchProperty = new SwitchProperty(this, 'switch', 'Switch', true, (value) => {
             console.log(`setWhite(${this.brightnessProperty.value}, ${value})`);
             device.setWhite(this.brightnessProperty.value, value);
         });
