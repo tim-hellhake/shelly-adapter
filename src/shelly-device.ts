@@ -52,10 +52,7 @@ export class ShellyDevice extends Device {
             new TemperatureProperty(this, 'internalTemperature', 'Internal temperature');
         }
 
-        if (device.powerMeter0 != undefined) {
-            console.log(`Detected internalTemperature property`);
-            new PowerProperty(this, 'power');
-        }
+        this.configurePowerMeters();
     }
 
     addCallbackAction(name: string, description: any, callback: () => void) {
@@ -128,5 +125,29 @@ export class ShellyDevice extends Device {
         }, () => {
             this.device.setRollerState('close');
         });
+    }
+
+    private configurePowerMeters(): void {
+        console.log('Configuring power meters');
+        const powerMeters: number[] = []
+
+        for (let i = 0; i < 4; i++) {
+            const property = `powerMeter${i}`;
+
+            if ((<any>this.device)[property] != undefined) {
+                powerMeters.push(i);
+            }
+        }
+
+        const multiple = powerMeters.length > 1;
+
+        if (multiple) {
+            new PowerProperty(this, 'powerMeter', 'Power all', true);
+        }
+
+        for (const i of powerMeters) {
+            const property = `powerMeter${i}`;
+            new PowerProperty(this, property, `Power ${i}`, !multiple);
+        }
     }
 }
