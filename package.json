@@ -43,7 +43,7 @@
     "exec": "{nodeLoader} {path}"
   },
   "dependencies": {
-    "shellies": "^0.16.0"
+    "shellies": "^0.18.0"
   },
   "devDependencies": {
     "typescript": "^3.8.3",
