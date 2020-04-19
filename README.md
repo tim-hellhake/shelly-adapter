@@ -7,3 +7,5 @@
 [![license](https://img.shields.io/badge/license-MPL--2.0-blue.svg)](LICENSE)
 
 Connect your shelly devices.
+
+Add the `username` and the `password` of a user with Shelly device access.

@@ -1,7 +1,7 @@
 {
   "name": "shelly-adapter",
   "display_name": "Shelly",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Connect your shelly devices",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -40,10 +40,23 @@
       "max": 2
     },
     "plugin": true,
-    "exec": "{nodeLoader} {path}"
+    "exec": "{nodeLoader} {path}",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "The username"
+        },
+        "password": {
+          "type": "string",
+          "title": "The password"
+        }
+      }
+    }
   },
   "dependencies": {
-    "shellies": "^0.16.0"
+    "shellies": "^0.18.0"
   },
   "devDependencies": {
     "typescript": "^3.8.3",

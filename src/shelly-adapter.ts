@@ -15,7 +15,21 @@ export class ShellyAdapter extends Adapter {
         addonManager.addAdapter(this);
 
         const {
+            username,
+            password,
         } = manifest.moziot.config;
+
+        if (!username) {
+            console.warn('Please specify username in the config');
+        }
+
+        if (!password) {
+            console.warn('Please specify password in the config');
+        }
+
+        if (username && password) {
+            shellies.setAuthCredentials(username, password);
+        }
 
         shellies.on('discover', device => {
             console.log(`Discovered new ${device.constructor.name} with id ${device.id}`);
