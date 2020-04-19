@@ -19,14 +19,6 @@ export class ShellyAdapter extends Adapter {
             password,
         } = manifest.moziot.config;
 
-        if (!username) {
-            console.warn('Please specify username in the config');
-        }
-
-        if (!password) {
-            console.warn('Please specify password in the config');
-        }
-
         if (username && password) {
             shellies.setAuthCredentials(username, password);
         }
