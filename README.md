@@ -1,5 +1,7 @@
 # Shelly adapter
 
+Add the `username` and the `password` of a user with Shelly device access. 
+
 [![build](https://github.com/tim-hellhake/esphome-adapter/workflows/Build/badge.svg)](https://github.com/tim-hellhake/esphome-adapter/actions?query=workflow:Build)
 [![dependencies](https://david-dm.org/tim-hellhake/shelly-adapter.svg)](https://david-dm.org/tim-hellhake/shelly-adapter)
 [![devDependencies](https://david-dm.org/tim-hellhake/shelly-adapter/dev-status.svg)](https://david-dm.org/tim-hellhake/shelly-adapter?type=dev)

@@ -7,6 +7,7 @@
 declare module 'shellies' {
     function on(type: 'discover', listener: (device: Shelly) => void): void;
     function start(): any;
+    function setAuthCredentials(username: string, password: string): void;
 
     class Shelly {
         public id: string;

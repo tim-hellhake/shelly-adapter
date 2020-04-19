@@ -3,7 +3,7 @@
   "id": "shelly-adapter",
   "name": "Shelly",
   "short_name": "Shelly",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Connect your shelly devices",
   "homepage_url": "https://github.com/tim-hellhake/shelly-adapter#readme",
   "license": "MPL-2.0",
@@ -14,6 +14,21 @@
       "strict_min_version": "0.10.0",
       "strict_max_version": "*",
       "primary_type": "adapter"
+    }
+  },
+  "options": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "The username"
+        },
+        "password": {
+          "type": "string",
+          "title": "The password"
+        }
+      }
     }
   }
 }
