@@ -14,10 +14,12 @@ declare module 'shellies' {
         public name: string;
         public internalTemperature?: number;
         public mode?: 'relay' | 'roller';
+        public rollerPosition?: number;
         public setRollerState(state: 'open' | 'stop' | 'close', duration?: number): Promise<void>;
         public setRollerPosition(position: number): Promise<void>;
         public on(type: 'change', listener: (prop: string, newValue: any, oldValue: any) => void): void;
         public setRelay(index: number, value: boolean): Promise<void>
         public setWhite(brightness: number, on: boolean): Promise<void>
+        public setRollerPosition(position: number): Promise<void>
     }
 }

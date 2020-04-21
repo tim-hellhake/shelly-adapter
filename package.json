@@ -1,7 +1,7 @@
 {
   "name": "shelly-adapter",
   "display_name": "Shelly",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Connect your shelly devices",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -32,7 +32,8 @@
     "lib/shelly-device.js",
     "lib/shelly-dimmer.js",
     "lib/switch-property.js",
-    "lib/temperature-property.js"
+    "lib/temperature-property.js",
+    "lib/roller-position-property.js"
   ],
   "moziot": {
     "api": {
