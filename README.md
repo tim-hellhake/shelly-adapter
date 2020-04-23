@@ -9,3 +9,4 @@
 Connect your shelly devices.
 
 Add the `username` and the `password` of a user with Shelly device access.
+For a Shelly Roller Shutter it is possible to specify the relative opening of the shutter. A value of 100% means that the roller shutter is fully open.

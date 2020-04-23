@@ -11,6 +11,7 @@ import { TemperatureProperty } from './temperature-property';
 import { PowerProperty } from './power-property';
 import { MainPowerProperty } from './main-power-property';
 import { MainSwitchProperty } from './main-switch-property';
+import { RollerPositionProperty } from "./roller-position-property";
 
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};
@@ -26,8 +27,7 @@ export class ShellyDevice extends Device {
             const property = this.properties.get(prop);
             if (property) {
                 property.setCachedValueAndNotify(newValue);
-            }
-            else {
+            } else {
                 console.warn(`No property for ${prop} found`);
             }
         });
@@ -38,6 +38,7 @@ export class ShellyDevice extends Device {
                     this.configureRelayMode();
                     break;
                 case 'roller':
+                    this.configureRollerPosition();
                     this.configureRollerMode();
                     break;
                 default:
@@ -55,6 +56,14 @@ export class ShellyDevice extends Device {
         }
 
         this.configurePowerMeters();
+    }
+
+    private configureRollerPosition(): void {
+        new RollerPositionProperty(this, 'rollerPosition', 'Relative roller shutter position', (value) => {
+            this.device.setRollerPosition(value).catch(reason => {
+                console.log(reason);
+            })
+        });
     }
 
     addCallbackAction(name: string, description: any, callback: () => void) {

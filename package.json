@@ -32,7 +32,8 @@
     "lib/shelly-device.js",
     "lib/shelly-dimmer.js",
     "lib/switch-property.js",
-    "lib/temperature-property.js"
+    "lib/temperature-property.js",
+    "lib/roller-position-property.js"
   ],
   "moziot": {
     "api": {
