@@ -60,7 +60,6 @@ export class ShellyDevice extends Device {
 
     private configureRollerPosition(): void {
         new RollerPositionProperty(this, 'rollerPosition', 'Relative roller shutter position', (value) => {
-            console.log(`setRollerPosition(${value})`);
             this.device.setRollerPosition(value).catch(reason => {
                 console.log(reason);
             })
