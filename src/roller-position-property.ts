@@ -11,6 +11,8 @@ export class RollerPositionProperty extends Property {
         super(device, name, {
             type: 'number',
             '@type': 'LevelProperty',
+            minimum: 0,
+            maximum: 100,
             title: title,
             description: 'The roller shutter position in percent'
         });
