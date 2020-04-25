@@ -8,13 +8,14 @@ import { Property, Device } from 'gateway-addon';
 import { MainPowerProperty } from './main-power-property';
 
 export class PowerProperty extends Property {
-    constructor(device: Device, name: string, title: string, primary: boolean, private mainPowerMeter?: MainPowerProperty) {
+    constructor(device: Device, name: string, title: string, primary: boolean, visible: boolean, private mainPowerMeter?: MainPowerProperty) {
         super(device, name, {
             '@type': primary ? 'InstantaneousPowerProperty' : undefined,
             type: 'number',
             unit: 'watt',
             title,
-            readOnly: true
+            readOnly: true,
+            visible
         });
 
         device.properties.set(name, this);

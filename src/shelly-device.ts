@@ -161,7 +161,7 @@ export class ShellyDevice extends Device {
 
         for (const i of powerMeters) {
             const property = `powerMeter${i}`;
-            new PowerProperty(this, property, `Power ${i}`, !multiple, mainPowerMeter);
+            new PowerProperty(this, property, `Power ${i}`, !multiple, !multiple, mainPowerMeter);
         }
     }
 }
