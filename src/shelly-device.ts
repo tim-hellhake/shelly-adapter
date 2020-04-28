@@ -64,7 +64,7 @@ export class ShellyDevice extends Device {
                 console.log(reason);
             })
         });
-        rollerPositionProperty.setValue(this.device.rollerPosition);
+        rollerPositionProperty.setCachedValueAndNotify(this.device.rollerPosition);
     }
 
     addCallbackAction(name: string, description: any, callback: () => void) {
