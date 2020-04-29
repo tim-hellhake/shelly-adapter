@@ -32,6 +32,8 @@ export class ShellyDevice extends Device {
             }
         });
 
+        let rollerMode = false;
+
         if (device.mode) {
             switch (device.mode) {
                 case 'relay':
@@ -40,6 +42,7 @@ export class ShellyDevice extends Device {
                 case 'roller':
                     this.configureRollerPosition();
                     this.configureRollerMode();
+                    rollerMode = true;
                     break;
                 default:
                     console.warn(`Unknown device mode: ${device.mode}`);
@@ -55,7 +58,9 @@ export class ShellyDevice extends Device {
             new TemperatureProperty(this, 'internalTemperature', 'Internal temperature');
         }
 
-        this.configurePowerMeters();
+        if (!rollerMode) {
+            this.configurePowerMeters();
+        }
     }
 
     private configureRollerPosition(): void {
