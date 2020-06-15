@@ -60,7 +60,7 @@
     "shellies": "^0.18.0"
   },
   "devDependencies": {
-    "typescript": "^3.8.3",
-    "@types/node": "^13.9.8"
+    "typescript": "^3.9.5",
+    "@types/node": "^14.0.13"
   }
 }
