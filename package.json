@@ -35,27 +35,6 @@
     "lib/temperature-property.js",
     "lib/roller-position-property.js"
   ],
-  "moziot": {
-    "api": {
-      "min": 2,
-      "max": 2
-    },
-    "plugin": true,
-    "exec": "{nodeLoader} {path}",
-    "schema": {
-      "type": "object",
-      "properties": {
-        "username": {
-          "type": "string",
-          "title": "The username"
-        },
-        "password": {
-          "type": "string",
-          "title": "The password"
-        }
-      }
-    }
-  },
   "dependencies": {
     "shellies": "^1.0.2"
   },
