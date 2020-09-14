@@ -57,10 +57,10 @@
     }
   },
   "dependencies": {
-    "shellies": "^0.18.0"
+    "shellies": "^1.0.2"
   },
   "devDependencies": {
-    "typescript": "^3.9.5",
-    "@types/node": "^14.0.13"
+    "typescript": "^4.0.2",
+    "@types/node": "^14.10.1"
   }
 }
