@@ -12,7 +12,7 @@ declare module 'shellies' {
     class Shelly {
         public id: string;
         public name: string;
-        public internalTemperature?: number;
+        public deviceTemperature?: number;
         public mode?: 'relay' | 'roller';
         public rollerPosition?: number;
         public setRollerState(state: 'open' | 'stop' | 'close', duration?: number): Promise<void>;
