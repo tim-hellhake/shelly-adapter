@@ -4,7 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import { Device } from 'gateway-addon';
+import { Device, Property } from 'gateway-addon';
 import { Shelly } from 'shellies';
 import { SwitchProperty } from './switch-property';
 import { TemperatureProperty } from './temperature-property';
@@ -15,6 +15,7 @@ import { RollerPositionProperty } from "./roller-position-property";
 
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};
+    private shellyProperties: { [key: string]: Property } = {};
 
     constructor(adapter: any, private device: Shelly) {
         super(adapter, device.id);
@@ -24,7 +25,7 @@ export class ShellyDevice extends Device {
 
         device.on('change', (prop: any, newValue: any, oldValue: any) => {
             console.log(`${prop} changed from ${oldValue} to ${newValue}`);
-            const property = this.properties.get(prop);
+            const property = this.shellyProperties[prop];
             if (property) {
                 property.setCachedValueAndNotify(newValue);
             } else {
@@ -55,7 +56,8 @@ export class ShellyDevice extends Device {
 
         if (device.deviceTemperature) {
             console.log(`Detected deviceTemperature property`);
-            new TemperatureProperty(this, 'deviceTemperature', 'Device temperature');
+            const property = new TemperatureProperty(this, 'internalTemperature', 'Device temperature');
+            this.shellyProperties['deviceTemperature'] = property;
         }
 
         if (!rollerMode) {
@@ -70,6 +72,7 @@ export class ShellyDevice extends Device {
             })
         });
         rollerPositionProperty.setCachedValueAndNotify(this.device.rollerPosition);
+        this.shellyProperties['rollerPosition'] = rollerPositionProperty;
     }
 
     addCallbackAction(name: string, description: any, callback: () => void) {
@@ -119,7 +122,8 @@ export class ShellyDevice extends Device {
 
         for (const i of relays) {
             const property = `relay${i}`;
-            new SwitchProperty(this, property, `Relay ${i}`, !multiple, (value) => this.device.setRelay(i, value), mainSwitchProperty);
+            const switchProperty = new SwitchProperty(this, property, `Relay ${i}`, !multiple, (value) => this.device.setRelay(i, value), mainSwitchProperty);
+            this.shellyProperties[property] = switchProperty;
         }
     }
 
@@ -166,7 +170,8 @@ export class ShellyDevice extends Device {
 
         for (const i of powerMeters) {
             const property = `power${i}`;
-            new PowerProperty(this, property, `Power ${i}`, !multiple, mainPowerMeter);
+            const powerProperty = new PowerProperty(this, `powerMeter${i}`, `Power ${i}`, !multiple, mainPowerMeter);
+            this.shellyProperties[property] = powerProperty;
         }
     }
 }
