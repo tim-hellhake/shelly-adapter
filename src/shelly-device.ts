@@ -58,6 +58,11 @@ export class ShellyDevice extends Device {
             new TemperatureProperty(this, 'internalTemperature', 'Internal temperature');
         }
 
+        if (device.deviceTemperature) {
+            console.log(`Detected deviceTemperature property`);
+            new TemperatureProperty(this, 'deviceTemperature', 'Device temperature');
+        }
+
         if (!rollerMode) {
             this.configurePowerMeters();
         }
