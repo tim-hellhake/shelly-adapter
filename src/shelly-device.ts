@@ -155,7 +155,7 @@ export class ShellyDevice extends Device {
         const powerMeters: number[] = []
 
         for (let i = 0; i < 4; i++) {
-            const property = `powerMeter${i}`;
+            const property = `power${i}`;
 
             if ((<any>this.device)[property] != undefined) {
                 powerMeters.push(i);
@@ -166,11 +166,11 @@ export class ShellyDevice extends Device {
         let mainPowerMeter: MainPowerProperty | undefined;
 
         if (multiple) {
-            mainPowerMeter = new MainPowerProperty(this, 'powerMeter', 'Power all');
+            mainPowerMeter = new MainPowerProperty(this, 'power', 'Power all');
         }
 
         for (const i of powerMeters) {
-            const property = `powerMeter${i}`;
+            const property = `power${i}`;
             new PowerProperty(this, property, `Power ${i}`, !multiple, mainPowerMeter);
         }
     }
