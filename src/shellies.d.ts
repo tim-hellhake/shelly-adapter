@@ -12,7 +12,6 @@ declare module 'shellies' {
     class Shelly {
         public id: string;
         public name: string;
-        public internalTemperature?: number;
         public deviceTemperature?: number;
         public mode?: 'relay' | 'roller';
         public rollerPosition?: number;

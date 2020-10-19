@@ -53,11 +53,6 @@ export class ShellyDevice extends Device {
             this.configureRelayMode();
         }
 
-        if (device.internalTemperature) {
-            console.log(`Detected internalTemperature property`);
-            new TemperatureProperty(this, 'internalTemperature', 'Internal temperature');
-        }
-
         if (device.deviceTemperature) {
             console.log(`Detected deviceTemperature property`);
             new TemperatureProperty(this, 'deviceTemperature', 'Device temperature');
