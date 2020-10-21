@@ -16,8 +16,6 @@ export class PowerProperty extends Property {
             title,
             readOnly: true
         });
-
-        device.properties.set(name, this);
     }
 
     public setCachedValueAndNotify(value: any) {

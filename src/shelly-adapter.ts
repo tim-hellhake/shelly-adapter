@@ -6,8 +6,8 @@
 
 import { Adapter } from 'gateway-addon';
 import shellies from 'shellies';
-import { ShellyDevice } from './shelly-device';
 import { ShellyDimmer } from './shelly-dimmer';
+import { ShellySwitch } from './shelly-switch';
 
 export class ShellyAdapter extends Adapter {
     constructor(addonManager: any, manifest: any) {
@@ -33,7 +33,7 @@ export class ShellyAdapter extends Adapter {
                     break;
                 default:
                     if ((<any>device)['relay0'] != undefined) {
-                        const shelly = new ShellyDevice(this, device);
+                        const shelly = new ShellySwitch(this, device);
                         this.handleDeviceAdded(shelly);
                     }
                     break;

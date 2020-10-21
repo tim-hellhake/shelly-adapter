@@ -14,7 +14,6 @@ export class BrightnessProperty extends Property {
             title: 'brightness',
             description: 'The brightness of the dimmer'
         });
-        device.properties.set(name, this);
     }
 
     async setValue(value: any): Promise<void> {

@@ -5,7 +5,7 @@
  */
 
 import { Property } from 'gateway-addon';
-import { ShellyDevice } from "./shelly-device";
+import { ShellyDevice } from './shelly-device';
 
 export class TemperatureProperty extends Property {
     constructor(device: ShellyDevice, name: string, title: string) {
@@ -17,7 +17,5 @@ export class TemperatureProperty extends Property {
             title,
             readOnly: true
         });
-
-        device.properties.set(name, this);
     }
 }

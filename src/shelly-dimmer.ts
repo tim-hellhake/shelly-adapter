@@ -4,36 +4,32 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import { Device } from 'gateway-addon';
 import { Shelly } from 'shellies';
 import { SwitchProperty } from './switch-property';
 import { BrightnessProperty } from './brightness-property';
+import { ShellyMeter } from './shelly-meter';
 
-export class ShellyDimmer extends Device {
+export class ShellyDimmer extends ShellyMeter {
     private switchProperty: SwitchProperty;
     private brightnessProperty: BrightnessProperty;
+
     constructor(adapter: any, device: Shelly) {
-        super(adapter, device.id);
+        super(adapter, device);
         this['@context'] = 'https://iot.mozilla.org/schemas/';
-        this['@type'] = ['Light'];
-        this.name = `${device.constructor.name} (${device.id})`;
+        this['@type'].push('Light');
+
         this.switchProperty = new SwitchProperty(this, 'switch', 'Switch', true, (value) => {
             console.log(`setWhite(${this.brightnessProperty.value}, ${value})`);
             device.setWhite(this.brightnessProperty.value, value);
         });
+
+        this.addProperty('switch', this.switchProperty);
+
         this.brightnessProperty = new BrightnessProperty(this, 'brightness', (value) => {
             console.log(`setWhite(${value}, ${this.switchProperty.value})`);
             device.setWhite(value, this.switchProperty.value);
         });
-        device.on('change', (prop: any, newValue: any, oldValue: any) => {
-            console.log(`${prop} changed from ${oldValue} to ${newValue}`);
-            const property = this.properties.get(prop);
-            if (property) {
-                property.setCachedValueAndNotify(newValue);
-            }
-            else {
-                console.warn(`No property for ${prop} found`);
-            }
-        });
+
+        this.addProperty('brightness', this.brightnessProperty);
     }
 }

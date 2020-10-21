@@ -17,8 +17,6 @@ export class MainPowerProperty extends Property {
             title,
             readOnly: true
         });
-
-        device.properties.set(name, this);
     }
 
     public setPowerValue(meter: string, value: number) {

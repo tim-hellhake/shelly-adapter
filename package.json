@@ -31,6 +31,8 @@
     "lib/shelly-adapter.js",
     "lib/shelly-device.js",
     "lib/shelly-dimmer.js",
+    "lib/shelly-meter.js",
+    "lib/shelly-switch.js",
     "lib/switch-property.js",
     "lib/temperature-property.js",
     "lib/roller-position-property.js"

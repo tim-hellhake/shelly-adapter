@@ -16,7 +16,6 @@ export class RollerPositionProperty extends Property {
             title: title,
             description: 'The roller shutter position in percent'
         });
-        device.properties.set(name, this);
     }
 
     async setValue(value: any): Promise<void> {
