@@ -7,6 +7,7 @@
 import { Adapter } from 'gateway-addon';
 import shellies from 'shellies';
 import { ShellyDimmer } from './shelly-dimmer';
+import { ShellyHT } from './shelly-ht';
 import { ShellySwitch } from './shelly-switch';
 
 export class ShellyAdapter extends Adapter {
@@ -27,10 +28,16 @@ export class ShellyAdapter extends Adapter {
             console.log(`Discovered new ${device.constructor.name} with id ${device.id}`);
 
             switch (device.constructor.name) {
-                case 'ShellyDimmer':
+                case 'ShellyDimmer': {
                     const shelly = new ShellyDimmer(this, device);
                     this.handleDeviceAdded(shelly);
                     break;
+                }
+                case 'ShellyHT': {
+                    const shelly = new ShellyHT(this, device);
+                    this.handleDeviceAdded(shelly);
+                    break
+                }
                 default:
                     if ((<any>device)['relay0'] != undefined) {
                         const shelly = new ShellySwitch(this, device);

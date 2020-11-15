@@ -21,5 +21,8 @@ declare module 'shellies' {
         public setRelay(index: number, value: boolean): Promise<void>
         public setWhite(brightness: number, on: boolean): Promise<void>
         public setRollerPosition(position: number): Promise<void>
+        public temperature?: number;
+        public humidity?: number;
+        public battery?: number;
     }
 }
