@@ -19,7 +19,7 @@ export class ShellyDevice extends Device {
         this.name = `${device.constructor.name} (${device.id})`;
 
         device.on('change', (prop: any, newValue: any, oldValue: any) => {
-            console.log(`${prop} changed from ${oldValue} to ${newValue}`);
+            console.log(`${device.id} ${prop} changed from ${oldValue} to ${newValue}`);
             const property = this.shellyProperties[prop];
             if (property) {
                 property.setCachedValueAndNotify(newValue);
