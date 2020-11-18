@@ -7,6 +7,7 @@
 import { Adapter } from 'gateway-addon';
 import shellies from 'shellies';
 import { ShellyDimmer } from './shelly-dimmer';
+import { ShellyDoorWindow2 } from './shelly-door-window-2';
 import { ShellyHT } from './shelly-ht';
 import { ShellySwitch } from './shelly-switch';
 
@@ -35,6 +36,11 @@ export class ShellyAdapter extends Adapter {
                 }
                 case 'ShellyHT': {
                     const shelly = new ShellyHT(this, device);
+                    this.handleDeviceAdded(shelly);
+                    break
+                }
+                case 'ShellyDoorWindow2': {
+                    const shelly = new ShellyDoorWindow2(this, device);
                     this.handleDeviceAdded(shelly);
                     break
                 }

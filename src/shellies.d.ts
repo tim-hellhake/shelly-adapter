@@ -24,5 +24,8 @@ declare module 'shellies' {
         public temperature?: number;
         public humidity?: number;
         public battery?: number;
+        public state?: boolean;
+        public vibration?: boolean;
+        public illuminance?: number;
     }
 }

@@ -27,18 +27,22 @@
     "lib/brightness-property.js",
     "lib/humidity-property.js",
     "lib/index.js",
+    "lib/level-property.js",
     "lib/main-power-property.js",
     "lib/main-switch-property.js",
+    "lib/open-property.js",
     "lib/power-property.js",
     "lib/shelly-adapter.js",
     "lib/shelly-device.js",
     "lib/shelly-dimmer.js",
+    "lib/shelly-door-window-2.js",
     "lib/shelly-ht.js",
     "lib/shelly-meter.js",
     "lib/shelly-switch.js",
     "lib/switch-property.js",
     "lib/temperature-property.js",
-    "lib/roller-position-property.js"
+    "lib/roller-position-property.js",
+    "lib/vibration-property.js"
   ],
   "dependencies": {
     "shellies": "^1.0.2"
