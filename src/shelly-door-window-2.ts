@@ -6,7 +6,7 @@
 
 import { Shelly } from 'shellies';
 import { BatteryProperty } from './battery-property';
-import { LevelProperty } from './level-property';
+import { IlluminanceProperty } from './illuminance-property';
 import { OpenProperty } from './open-property';
 import { ShellyDevice } from './shelly-device';
 import { TemperatureProperty } from './temperature-property';
@@ -33,7 +33,7 @@ export class ShellyDoorWindow2 extends ShellyDevice {
         this.addProperty('battery', battery);
         battery.setCachedValueAndNotify(device.battery);
 
-        const illuminance = new LevelProperty(this, 'illuminance', 'Illuminance');
+        const illuminance = new IlluminanceProperty(this, 'illuminance', 'Illuminance');
         this.addProperty('illuminance', illuminance);
         illuminance.setCachedValueAndNotify(device.illuminance);
     }

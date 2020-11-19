@@ -7,12 +7,12 @@
 import { Property } from 'gateway-addon';
 import { ShellyDevice } from './shelly-device';
 
-export class LevelProperty extends Property {
+export class IlluminanceProperty extends Property {
     constructor(device: ShellyDevice, name: string, title: string) {
         super(device, name, {
-            '@type': 'LevelProperty',
             type: 'integer',
             title,
+            min: 0,
             readOnly: true
         });
     }
