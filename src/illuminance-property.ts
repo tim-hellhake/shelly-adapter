@@ -12,7 +12,7 @@ export class IlluminanceProperty extends Property {
         super(device, name, {
             type: 'integer',
             title,
-            min: 0,
+            minimum: 0,
             unit: 'lux',
             readOnly: true
         });
