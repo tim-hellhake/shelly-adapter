@@ -13,6 +13,7 @@ export class IlluminanceProperty extends Property {
             type: 'integer',
             title,
             min: 0,
+            unit: 'lux',
             readOnly: true
         });
     }
