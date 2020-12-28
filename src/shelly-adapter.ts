@@ -13,14 +13,14 @@ import { ShellyHT } from './shelly-ht';
 import { ShellySwitch } from './shelly-switch';
 
 export class ShellyAdapter extends Adapter {
-    constructor(addonManager: any, manifest: any) {
-        super(addonManager, ShellyAdapter.name, manifest.name);
+    constructor(addonManager: any, id: string, config: Config) {
+        super(addonManager, ShellyAdapter.name, id);
         addonManager.addAdapter(this);
 
         const {
             username,
             password,
-        } = <Config><unknown>manifest.moziot.config;
+        } = config;
 
         if (username && password) {
             shellies.setAuthCredentials(username, password);

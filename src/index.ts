@@ -4,6 +4,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
+import { AddonManagerProxy, Database } from 'gateway-addon';
+import { Config } from './config';
 import { ShellyAdapter } from './shelly-adapter';
 
-export = (addonManager: any, manifest: any) => new ShellyAdapter(addonManager, manifest);
+export = async function (addonManager: AddonManagerProxy): Promise<void> {
+    const id = 'shelly-adapter';
+    const db = new Database(id, '');
+    await db.open();
+    const config = <Config><unknown>await db.loadConfig();
+    await db.close();
+    new ShellyAdapter(addonManager, id, config);
+}
