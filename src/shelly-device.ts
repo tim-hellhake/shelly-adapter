@@ -4,60 +4,72 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import { Device, Property } from 'gateway-addon';
-import { PropertyValue } from 'gateway-addon/lib/schema';
-import { Shelly } from 'shellies';
-import { TemperatureProperty } from './temperature-property';
+import {Action, Adapter, Device, Property} from 'gateway-addon';
+import {Action as ActionSchema, PropertyValue} from 'gateway-addon/lib/schema';
+import {Shelly} from 'shellies';
+import {TemperatureProperty} from './temperature-property';
 
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};
+
     private propertyByAlias: Record<string, Property<PropertyValue>> = {};
 
-    constructor(adapter: any, device: Shelly) {
-        super(adapter, device.id);
-        this['@context'] = 'https://iot.mozilla.org/schemas/';
-        this['@type'] = [];
-        this.setTitle(`${device.constructor.name} (${device.id})`);
+    constructor(adapter: Adapter, device: Shelly) {
+      super(adapter, device.id);
+      this['@context'] = 'https://iot.mozilla.org/schemas/';
+      this['@type'] = [];
+      this.setTitle(`${device.constructor.name} (${device.id})`);
 
-        device.on('change', (prop: any, newValue: any, oldValue: any) => {
-            console.log(`${device.id} ${prop} changed from ${oldValue} to ${newValue}`);
-            const property = this.propertyByAlias[prop] ?? this.findProperty(prop);
-            if (property) {
-                property.setCachedValueAndNotify(newValue);
-            } else {
-                console.warn(`No property for ${prop} found`);
-            }
+      device.on(
+        'change',
+        (prop: string, newValue: PropertyValue, oldValue: PropertyValue) => {
+          console.log(
+            `${device.id} ${prop} changed from ${oldValue} to ${newValue}`);
+
+          const property =
+          this.propertyByAlias[prop] ?? this.findProperty(prop);
+
+          if (property) {
+            property.setCachedValueAndNotify(newValue);
+          } else {
+            console.warn(`No property for ${prop} found`);
+          }
         });
 
-        if (device.deviceTemperature) {
-            console.log(`Detected deviceTemperature property`);
-            const property = new TemperatureProperty(this, 'internalTemperature', 'Device temperature');
-            this.addPropertyWithAlias('deviceTemperature', property);
-        }
+      if (device.deviceTemperature) {
+        console.log(`Detected deviceTemperature property`);
+        const property = new TemperatureProperty(
+          this, 'internalTemperature', 'Device temperature');
+        this.addPropertyWithAlias('deviceTemperature', property);
+      }
     }
 
-    protected addPropertyWithAlias(shellyProperty: string, property: Property<PropertyValue>) {
-        this.addProperty(property);
-        this.propertyByAlias[shellyProperty] = property;
+    protected addPropertyWithAlias(
+      shellyProperty: string, property: Property<PropertyValue>): void {
+      this.addProperty(property);
+      this.propertyByAlias[shellyProperty] = property;
     }
 
-    protected addCallbackAction(name: string, description: any, callback: () => void) {
-        this.addAction(name, description);
-        this.callbacks[name] = callback;
+    protected addCallbackAction(
+      name: string, description: ActionSchema,
+      callback: () => void): void {
+      this.addAction(name, description);
+      this.callbacks[name] = callback;
     }
 
-    async performAction(action: any) {
-        action.start();
+    async performAction(action: Action): Promise<void> {
+      action.start();
 
-        const callback = this.callbacks[action.name];
+      const name = action.asActionDescription().name;
+      const callback = this.callbacks[name];
 
-        if (callback != undefined) {
-            console.log(`Executing action ${action.name}`);
-            callback();
-        } else {
-            console.warn(`Unknown action ${action.name}`);
-        }
+      if (callback) {
+        console.log(`Executing action ${name}`);
+        callback();
+      } else {
+        console.warn(`Unknown action ${name}`);
+      }
 
-        action.finish();
+      action.finish();
     }
 }

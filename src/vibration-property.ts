@@ -4,16 +4,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import { Property } from 'gateway-addon';
-import { ShellyDevice } from './shelly-device';
+import {Property} from 'gateway-addon';
+import {ShellyDevice} from './shelly-device';
 
 export class VibrationProperty extends Property<boolean> {
-    constructor(device: ShellyDevice, name: string, title: string) {
-        super(device, name, {
-            '@type': 'BooleanProperty',
-            type: 'boolean',
-            title,
-            readOnly: true
-        });
-    }
+  constructor(device: ShellyDevice, name: string, title: string) {
+    super(device, name, {
+      '@type': 'BooleanProperty',
+      type: 'boolean',
+      title,
+      readOnly: true,
+    });
+  }
 }

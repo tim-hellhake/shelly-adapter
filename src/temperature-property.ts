@@ -4,18 +4,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import { Property } from 'gateway-addon';
-import { ShellyDevice } from './shelly-device';
+import {Property} from 'gateway-addon';
+import {ShellyDevice} from './shelly-device';
 
 export class TemperatureProperty extends Property<number> {
-    constructor(device: ShellyDevice, name: string, title: string) {
-        super(device, name, {
-            '@type': 'TemperatureProperty',
-            type: 'number',
-            unit: 'degree celsius',
-            multipleOf: 0.01,
-            title,
-            readOnly: true
-        });
-    }
+  constructor(device: ShellyDevice, name: string, title: string) {
+    super(device, name, {
+      '@type': 'TemperatureProperty',
+      type: 'number',
+      unit: 'degree celsius',
+      multipleOf: 0.01,
+      title,
+      readOnly: true,
+    });
+  }
 }

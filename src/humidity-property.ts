@@ -4,20 +4,20 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import { Property } from 'gateway-addon';
-import { ShellyDevice } from './shelly-device';
+import {Property} from 'gateway-addon';
+import {ShellyDevice} from './shelly-device';
 
 export class HumidityProperty extends Property<number> {
-    constructor(device: ShellyDevice, name: string, title: string) {
-        super(device, name, {
-            '@type': 'HumidityProperty',
-            type: 'number',
-            unit: 'percent',
-            minimum: 0,
-            maximum: 100,
-            multipleOf: 0.1,
-            title,
-            readOnly: true
-        });
-    }
+  constructor(device: ShellyDevice, name: string, title: string) {
+    super(device, name, {
+      '@type': 'HumidityProperty',
+      type: 'number',
+      unit: 'percent',
+      minimum: 0,
+      maximum: 100,
+      multipleOf: 0.1,
+      title,
+      readOnly: true,
+    });
+  }
 }

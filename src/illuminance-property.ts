@@ -4,17 +4,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import { Property } from 'gateway-addon';
-import { ShellyDevice } from './shelly-device';
+import {Property} from 'gateway-addon';
+import {ShellyDevice} from './shelly-device';
 
 export class IlluminanceProperty extends Property<number> {
-    constructor(device: ShellyDevice, name: string, title: string) {
-        super(device, name, {
-            type: 'integer',
-            title,
-            minimum: 0,
-            unit: 'lux',
-            readOnly: true
-        });
-    }
+  constructor(device: ShellyDevice, name: string, title: string) {
+    super(device, name, {
+      type: 'integer',
+      title,
+      minimum: 0,
+      unit: 'lux',
+      readOnly: true,
+    });
+  }
 }
