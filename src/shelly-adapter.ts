@@ -6,6 +6,7 @@
 
 import { Adapter } from 'gateway-addon';
 import shellies from 'shellies';
+import { Config } from './config';
 import { ShellyDimmer } from './shelly-dimmer';
 import { ShellyDoorWindow2 } from './shelly-door-window-2';
 import { ShellyHT } from './shelly-ht';
@@ -19,7 +20,7 @@ export class ShellyAdapter extends Adapter {
         const {
             username,
             password,
-        } = manifest.moziot.config;
+        } = <Config><unknown>manifest.moziot.config;
 
         if (username && password) {
             shellies.setAuthCredentials(username, password);
