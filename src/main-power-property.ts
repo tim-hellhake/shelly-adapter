@@ -6,7 +6,7 @@
 
 import { Property, Device } from 'gateway-addon';
 
-export class MainPowerProperty extends Property {
+export class MainPowerProperty extends Property<number> {
     private powerValues: { [key: string]: number } = {};
 
     constructor(device: Device, name: string, title: string) {

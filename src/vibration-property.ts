@@ -7,7 +7,7 @@
 import { Property } from 'gateway-addon';
 import { ShellyDevice } from './shelly-device';
 
-export class VibrationProperty extends Property {
+export class VibrationProperty extends Property<boolean> {
     constructor(device: ShellyDevice, name: string, title: string) {
         super(device, name, {
             '@type': 'BooleanProperty',

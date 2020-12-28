@@ -17,15 +17,24 @@ export class ShellyHT extends ShellyDevice {
         this['@type'].push('HumiditySensor');
 
         const temperature = new TemperatureProperty(this, 'temperature', 'Temperature');
-        this.addProperty('temperature', temperature);
-        temperature.setCachedValueAndNotify(device.temperature);
+        this.addProperty(temperature);
+
+        if (device.temperature) {
+            temperature.setCachedValueAndNotify(device.temperature);
+        }
 
         const humidity = new HumidityProperty(this, 'humidity', 'Humidity');
-        this.addProperty('humidity', humidity);
-        humidity.setCachedValueAndNotify(device.humidity);
+        this.addProperty(humidity);
+
+        if (device.humidity) {
+            humidity.setCachedValueAndNotify(device.humidity);
+        }
 
         const battery = new BatteryProperty(this, 'battery', 'Battery');
-        this.addProperty('battery', battery);
-        battery.setCachedValueAndNotify(device.battery);
+        this.addProperty(battery);
+
+        if (device.battery) {
+            battery.setCachedValueAndNotify(device.battery);
+        }
     }
 }

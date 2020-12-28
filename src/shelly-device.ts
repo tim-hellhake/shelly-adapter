@@ -5,22 +5,23 @@
  */
 
 import { Device, Property } from 'gateway-addon';
+import { PropertyValue } from 'gateway-addon/lib/schema';
 import { Shelly } from 'shellies';
 import { TemperatureProperty } from './temperature-property';
 
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};
-    private shellyProperties: { [key: string]: Property } = {};
+    private propertyByAlias: Record<string, Property<PropertyValue>> = {};
 
     constructor(adapter: any, device: Shelly) {
         super(adapter, device.id);
         this['@context'] = 'https://iot.mozilla.org/schemas/';
         this['@type'] = [];
-        this.name = `${device.constructor.name} (${device.id})`;
+        this.setTitle(`${device.constructor.name} (${device.id})`);
 
         device.on('change', (prop: any, newValue: any, oldValue: any) => {
             console.log(`${device.id} ${prop} changed from ${oldValue} to ${newValue}`);
-            const property = this.shellyProperties[prop];
+            const property = this.propertyByAlias[prop] ?? this.findProperty(prop);
             if (property) {
                 property.setCachedValueAndNotify(newValue);
             } else {
@@ -31,13 +32,13 @@ export class ShellyDevice extends Device {
         if (device.deviceTemperature) {
             console.log(`Detected deviceTemperature property`);
             const property = new TemperatureProperty(this, 'internalTemperature', 'Device temperature');
-            this.addProperty('deviceTemperature', property);
+            this.addPropertyWithAlias('deviceTemperature', property);
         }
     }
 
-    protected addProperty(shellyProperty: string, property: Property) {
-        this.properties.set(property.name, property);
-        this.shellyProperties[shellyProperty] = property;
+    protected addPropertyWithAlias(shellyProperty: string, property: Property<PropertyValue>) {
+        this.addProperty(property);
+        this.propertyByAlias[shellyProperty] = property;
     }
 
     protected addCallbackAction(name: string, description: any, callback: () => void) {

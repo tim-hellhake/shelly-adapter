@@ -6,7 +6,7 @@
 
 import { Property, Device } from 'gateway-addon';
 
-export class RollerPositionProperty extends Property {
+export class RollerPositionProperty extends Property<number> {
     constructor(device: Device, name: string, title: string, private onChange: (value: number) => void) {
         super(device, name, {
             type: 'number',
@@ -18,8 +18,9 @@ export class RollerPositionProperty extends Property {
         });
     }
 
-    async setValue(value: any): Promise<void> {
-        super.setValue(value);
-        this.onChange(value);
+    async setValue(value: any): Promise<number> {
+        const newVal = await super.setValue(value);
+        this.onChange(newVal);
+        return newVal;
     }
 }

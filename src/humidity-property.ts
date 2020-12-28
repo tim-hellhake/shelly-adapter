@@ -7,7 +7,7 @@
 import { Property } from 'gateway-addon';
 import { ShellyDevice } from './shelly-device';
 
-export class HumidityProperty extends Property {
+export class HumidityProperty extends Property<number> {
     constructor(device: ShellyDevice, name: string, title: string) {
         super(device, name, {
             '@type': 'HumidityProperty',

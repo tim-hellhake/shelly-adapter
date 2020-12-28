@@ -7,7 +7,7 @@
 import { Property } from 'gateway-addon';
 import { ShellyDevice } from './shelly-device';
 
-export class OpenProperty extends Property {
+export class OpenProperty extends Property<boolean> {
     constructor(device: ShellyDevice, name: string) {
         super(device, name, {
             '@type': 'OpenProperty',

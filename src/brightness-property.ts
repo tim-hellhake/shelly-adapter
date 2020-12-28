@@ -6,7 +6,7 @@
 
 import { Property, Device } from 'gateway-addon';
 
-export class BrightnessProperty extends Property {
+export class BrightnessProperty extends Property<number>{
     constructor(device: Device, name: string, private onChange: (value: number) => void) {
         super(device, name, {
             type: 'number',
@@ -16,8 +16,9 @@ export class BrightnessProperty extends Property {
         });
     }
 
-    async setValue(value: any): Promise<void> {
-        super.setValue(value);
-        this.onChange(value);
+    async setValue(value: number): Promise<number> {
+        const newVal = await super.setValue(value);
+        this.onChange(newVal);
+        return newVal;
     }
 }

@@ -18,18 +18,20 @@ export class ShellyDimmer extends ShellyMeter {
         this['@context'] = 'https://iot.mozilla.org/schemas/';
         this['@type'].push('Light');
 
-        this.switchProperty = new SwitchProperty(this, 'switch', 'Switch', true, (value) => {
-            console.log(`setWhite(${this.brightnessProperty.value}, ${value})`);
-            device.setWhite(this.brightnessProperty.value, value);
+        this.switchProperty = new SwitchProperty(this, 'switch', 'Switch', true, async (value) => {
+            const brightness = await this.brightnessProperty.getValue();
+            console.log(`setWhite(${brightness}, ${value})`);
+            device.setWhite(brightness, value);
         });
 
-        this.addProperty('switch', this.switchProperty);
+        this.addProperty(this.switchProperty);
 
-        this.brightnessProperty = new BrightnessProperty(this, 'brightness', (value) => {
-            console.log(`setWhite(${value}, ${this.switchProperty.value})`);
-            device.setWhite(value, this.switchProperty.value);
+        this.brightnessProperty = new BrightnessProperty(this, 'brightness', async (value) => {
+            const switchValue = await this.switchProperty.getValue();
+            console.log(`setWhite(${value}, ${switchValue})`);
+            device.setWhite(value, switchValue);
         });
 
-        this.addProperty('brightness', this.brightnessProperty);
+        this.addProperty(this.brightnessProperty);
     }
 }

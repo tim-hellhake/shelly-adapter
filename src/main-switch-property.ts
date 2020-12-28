@@ -6,7 +6,7 @@
 
 import { Property, Device } from 'gateway-addon';
 
-export class MainSwitchProperty extends Property {
+export class MainSwitchProperty extends Property<boolean> {
     private switchValues: { [key: string]: boolean } = {};
 
     constructor(device: Device, name: string, title: string, primary: boolean, private onChange: (value: boolean) => void) {
@@ -18,9 +18,10 @@ export class MainSwitchProperty extends Property {
         });
     }
 
-    async setValue(value: any): Promise<void> {
-        super.setValue(value);
-        this.onChange(value);
+    async setValue(value: boolean): Promise<boolean> {
+        const newVal = await super.setValue(value);
+        this.onChange(newVal);
+        return newVal;
     }
 
     public setSwitchValue(name: string, value: boolean) {

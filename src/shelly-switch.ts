@@ -39,8 +39,12 @@ export class ShellySwitch extends ShellyMeter {
                 console.log(reason);
             })
         });
-        rollerPositionProperty.setCachedValueAndNotify(this.device.rollerPosition);
-        this.addProperty('rollerPosition', rollerPositionProperty);
+
+        this.addProperty(rollerPositionProperty);
+
+        if (this.device.rollerPosition) {
+            rollerPositionProperty.setCachedValueAndNotify(this.device.rollerPosition);
+        }
     }
 
     private configureRelayMode(): void {
@@ -71,7 +75,7 @@ export class ShellySwitch extends ShellyMeter {
         for (const i of relays) {
             const property = `relay${i}`;
             const switchProperty = new SwitchProperty(this, property, `Relay ${i}`, !multiple, (value) => this.device.setRelay(i, value), mainSwitchProperty);
-            this.addProperty(property, switchProperty);
+            this.addProperty(switchProperty);
         }
     }
 

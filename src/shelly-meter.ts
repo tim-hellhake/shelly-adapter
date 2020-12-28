@@ -36,7 +36,7 @@ export class ShellyMeter extends ShellyDevice {
             for (const i of powerMeters) {
                 const property = `power${i}`;
                 const powerProperty = new PowerProperty(this, `powerMeter${i}`, `Power ${i}`, !multiple, mainPowerMeter);
-                this.addProperty(property, powerProperty);
+                this.addPropertyWithAlias(property, powerProperty);
             }
         } else {
             console.log('Ignoring power meters in roller mode');
