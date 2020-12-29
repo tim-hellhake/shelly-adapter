@@ -29,6 +29,7 @@
     "lib/humidity-property.js",
     "lib/illuminance-property.js",
     "lib/index.js",
+    "lib/log.js",
     "lib/main-power-property.js",
     "lib/main-switch-property.js",
     "lib/open-property.js",

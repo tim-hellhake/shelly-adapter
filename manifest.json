@@ -27,6 +27,10 @@
         "password": {
           "type": "string",
           "title": "The password"
+        },
+        "debugLogs": {
+          "type": "boolean",
+          "title": "Enable debug logs"
         }
       }
     }

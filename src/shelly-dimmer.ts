@@ -9,6 +9,7 @@ import {SwitchProperty} from './switch-property';
 import {BrightnessProperty} from './brightness-property';
 import {ShellyMeter} from './shelly-meter';
 import {Adapter} from 'gateway-addon';
+import {debug} from './log';
 
 export class ShellyDimmer extends ShellyMeter {
     private switchProperty: SwitchProperty;
@@ -23,7 +24,7 @@ export class ShellyDimmer extends ShellyMeter {
       this.switchProperty = new SwitchProperty(
         this, 'switch', 'Switch', true, async (value) => {
           const brightness = await this.brightnessProperty.getValue();
-          console.log(`setWhite(${brightness}, ${value})`);
+          debug(`setWhite(${brightness}, ${value})`);
           device.setWhite(brightness, value);
         });
 
@@ -32,7 +33,7 @@ export class ShellyDimmer extends ShellyMeter {
       this.brightnessProperty = new BrightnessProperty(
         this, 'brightness', async (value) => {
           const switchValue = await this.switchProperty.getValue();
-          console.log(`setWhite(${value}, ${switchValue})`);
+          debug(`setWhite(${value}, ${switchValue})`);
           device.setWhite(value, switchValue);
         });
 

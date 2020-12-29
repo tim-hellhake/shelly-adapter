@@ -60,7 +60,10 @@ export class ShellySwitch extends ShellyMeter {
       const property = `relay${i}`;
 
       if (this.device.hasOwnProperty(property)) {
+        console.log(`Found ${property}`);
         relays.push(i);
+      } else {
+        console.log(`No ${property} present`);
       }
     }
 

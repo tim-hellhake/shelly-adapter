@@ -6,6 +6,7 @@
 
 import {AddonManagerProxy, Database} from 'gateway-addon';
 import {Config} from './config';
+import {debugLogs} from './log';
 import {ShellyAdapter} from './shelly-adapter';
 
 export = async function(addonManager: AddonManagerProxy): Promise<void> {
@@ -14,5 +15,6 @@ export = async function(addonManager: AddonManagerProxy): Promise<void> {
   await db.open();
   const config = <Config><unknown> await db.loadConfig();
   await db.close();
+  debugLogs(config.debugLogs ?? false);
   new ShellyAdapter(addonManager, id, config);
 }

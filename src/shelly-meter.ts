@@ -23,7 +23,10 @@ export class ShellyMeter extends ShellyDevice {
         const property = `power${i}`;
 
         if (device.hasOwnProperty(property)) {
+          console.log(`Found ${property}`);
           powerMeters.push(i);
+        } else {
+          console.log(`No ${property} present`);
         }
       }
 

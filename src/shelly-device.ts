@@ -7,6 +7,7 @@
 import {Action, Adapter, Device, Property} from 'gateway-addon';
 import {Action as ActionSchema, PropertyValue} from 'gateway-addon/lib/schema';
 import {Shelly} from 'shellies';
+import {debug} from './log';
 import {TemperatureProperty} from './temperature-property';
 
 export class ShellyDevice extends Device {
@@ -23,7 +24,7 @@ export class ShellyDevice extends Device {
       device.on(
         'change',
         (prop: string, newValue: PropertyValue, oldValue: PropertyValue) => {
-          console.log(
+          debug(
             `${device.id} ${prop} changed from ${oldValue} to ${newValue}`);
 
           const property =
@@ -64,7 +65,7 @@ export class ShellyDevice extends Device {
       const callback = this.callbacks[name];
 
       if (callback) {
-        console.log(`Executing action ${name}`);
+        debug(`Executing action ${name}`);
         callback();
       } else {
         console.warn(`Unknown action ${name}`);
