@@ -4,6 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
+import {networkInterfaces} from 'os';
 import {Adapter, AddonManagerProxy} from 'gateway-addon';
 import shellies from 'shellies';
 import {Config} from './config';
@@ -13,13 +14,18 @@ import {ShellyHT} from './shelly-ht';
 import {ShellySwitch} from './shelly-switch';
 
 export class ShellyAdapter extends Adapter {
-  constructor(addonManager: AddonManagerProxy, id: string, config: Config) {
+  constructor(addonManager: AddonManagerProxy,
+              id: string,
+              config: Config,
+              // eslint-disable-next-line no-unused-vars
+              errorCallback: (error: string) => void) {
     super(addonManager, ShellyAdapter.name, id);
     addonManager.addAdapter(this);
 
     const {
       username,
       password,
+      networkInterface,
     } = config;
 
     if (username && password) {
@@ -55,6 +61,34 @@ export class ShellyAdapter extends Adapter {
       }
     });
 
-    shellies.start();
+    if (networkInterface) {
+      const interfaces = networkInterfaces();
+      const subInterfaces = interfaces[networkInterface];
+
+      if (!subInterfaces) {
+        const ifs = Object.keys(interfaces);
+        const msg = `Network interface ${networkInterface} does not exist in ${ifs}`;
+        errorCallback(msg);
+        throw new Error(msg);
+      }
+
+      let interfaceAddress = '';
+
+      for (const subInterface of subInterfaces) {
+        if (subInterface.family === 'IPv4') {
+          interfaceAddress = subInterface.address;
+        }
+      }
+
+      if (!interfaceAddress) {
+        errorCallback(`No IPv4 interface found on ${networkInterfaces}`);
+      }
+
+      console.log(`Starting on ${interfaceAddress}`);
+
+      shellies.start(interfaceAddress);
+    } else {
+      shellies.start();
+    }
   }
 }

@@ -31,6 +31,10 @@
         "debugLogs": {
           "type": "boolean",
           "title": "Enable debug logs"
+        },
+        "networkInterface": {
+          "type": "string",
+          "title": "The interface on which should be listened for multicast traffic. Leave it empty if you want to listen on all interfaces."
         }
       }
     }
