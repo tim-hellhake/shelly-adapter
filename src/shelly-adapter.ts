@@ -37,7 +37,8 @@ export class ShellyAdapter extends Adapter {
         `Discovered new ${device.constructor.name} with id ${device.id}`);
 
       switch (device.constructor.name) {
-        case 'ShellyDimmer': {
+        case 'ShellyDimmer':
+        case 'ShellyDimmer2': {
           const shelly = new ShellyDimmer(this, device);
           this.handleDeviceAdded(shelly);
           break;
