@@ -44,7 +44,8 @@
     "lib/switch-property.js",
     "lib/temperature-property.js",
     "lib/roller-position-property.js",
-    "lib/vibration-property.js"
+    "lib/vibration-property.js",
+    "lib/tilt-property.js"
   ],
   "dependencies": {
     "shellies": "^1.5.0"

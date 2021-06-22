@@ -5,7 +5,7 @@
  */
 
 import {Action, Adapter, Device, Property} from 'gateway-addon';
-import {Action as ActionSchema, PropertyValue} from 'gateway-addon/lib/schema';
+import {Action as ActionSchema, Any} from 'gateway-addon/lib/schema';
 import {Shelly} from 'shellies';
 import {debug} from './log';
 import {TemperatureProperty} from './temperature-property';
@@ -13,7 +13,7 @@ import {TemperatureProperty} from './temperature-property';
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};
 
-    private propertyByAlias: Record<string, Property<PropertyValue>> = {};
+    private propertyByAlias: Record<string, Property<Any>> = {};
 
     constructor(adapter: Adapter, device: Shelly) {
       super(adapter, device.id);
@@ -23,7 +23,7 @@ export class ShellyDevice extends Device {
 
       device.on(
         'change',
-        (prop: string, newValue: PropertyValue, oldValue: PropertyValue) => {
+        (prop: string, newValue: Any, oldValue: Any) => {
           debug(
             `${device.id} ${prop} changed from ${oldValue} to ${newValue}`);
 
@@ -46,7 +46,7 @@ export class ShellyDevice extends Device {
     }
 
     protected addPropertyWithAlias(
-      shellyProperty: string, property: Property<PropertyValue>): void {
+      shellyProperty: string, property: Property<Any>): void {
       this.addProperty(property);
       this.propertyByAlias[shellyProperty] = property;
     }

@@ -12,6 +12,7 @@ import {OpenProperty} from './open-property';
 import {ShellyDevice} from './shelly-device';
 import {TemperatureProperty} from './temperature-property';
 import {VibrationProperty} from './vibration-property';
+import {TiltProperty} from './tilt-property';
 
 export class ShellyDoorWindow2 extends ShellyDevice {
   constructor(adapter: Adapter, device: Shelly) {
@@ -53,6 +54,13 @@ export class ShellyDoorWindow2 extends ShellyDevice {
 
     if (typeof device.illuminance === 'number') {
       illuminance.setCachedValueAndNotify(device.illuminance);
+    }
+
+    const tilt = new TiltProperty(this, 'tilt', 'Tilt Angle');
+    this.addProperty(tilt);
+
+    if (typeof device.tilt === 'number') {
+      tilt.setCachedValueAndNotify(device.tilt);
     }
   }
 }

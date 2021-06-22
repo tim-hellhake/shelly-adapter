@@ -27,5 +27,6 @@ declare module 'shellies' {
         public state?: boolean;
         public vibration?: boolean;
         public illuminance?: number;
+        public tilt?: number;
     }
 }
