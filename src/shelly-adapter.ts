@@ -13,6 +13,7 @@ import {ShellyDoorWindow2} from './shelly-door-window-2';
 import {ShellyHT} from './shelly-ht';
 import {ShellySwitch} from './shelly-switch';
 import {ShellyUni} from './shelly-uni';
+import {debug} from './log';
 
 export class ShellyAdapter extends Adapter {
   constructor(addonManager: AddonManagerProxy,
@@ -36,6 +37,8 @@ export class ShellyAdapter extends Adapter {
     shellies.on('discover', (device) => {
       console.log(
         `Discovered new ${device.constructor.name} with id ${device.id}`);
+
+      debug(device);
 
       switch (device.constructor.name) {
         case 'ShellyDimmer':
