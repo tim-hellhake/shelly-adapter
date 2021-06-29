@@ -12,6 +12,7 @@ import {ShellyDimmer} from './shelly-dimmer';
 import {ShellyDoorWindow2} from './shelly-door-window-2';
 import {ShellyHT} from './shelly-ht';
 import {ShellySwitch} from './shelly-switch';
+import {ShellyUni} from './shelly-uni';
 
 export class ShellyAdapter extends Adapter {
   constructor(addonManager: AddonManagerProxy,
@@ -50,6 +51,11 @@ export class ShellyAdapter extends Adapter {
         }
         case 'ShellyDoorWindow2': {
           const shelly = new ShellyDoorWindow2(this, device);
+          this.handleDeviceAdded(shelly);
+          break;
+        }
+        case 'ShellyUni': {
+          const shelly = new ShellyUni(this, device);
           this.handleDeviceAdded(shelly);
           break;
         }
