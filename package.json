@@ -47,6 +47,7 @@
     "lib/temperature-property.js",
     "lib/roller-position-property.js",
     "lib/vibration-property.js",
+    "lib/voltage-property.js",
     "lib/tilt-property.js"
   ],
   "dependencies": {

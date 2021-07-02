@@ -12,6 +12,7 @@ import {MainSwitchProperty} from './main-switch-property';
 import {TemperatureProperty} from './temperature-property';
 import {InputProperty} from './input-property';
 import {HumidityProperty} from './humidity-property';
+import {VoltageProperty} from './voltage-property';
 
 export class ShellyUni extends ShellyDevice {
 
@@ -53,5 +54,9 @@ export class ShellyUni extends ShellyDevice {
     const humidityProperty = new HumidityProperty(
       this, 'externalHumidity', 'External humidity');
     this.addProperty(humidityProperty);
+
+    const voltageProperty = new VoltageProperty(
+      this, 'voltage0', 'Voltage');
+    this.addProperty(voltageProperty);
   }
 }
