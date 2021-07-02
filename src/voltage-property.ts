@@ -10,6 +10,7 @@ import {ShellyDevice} from './shelly-device';
 export class VoltageProperty extends Property<number> {
   constructor(device: ShellyDevice, name: string, title: string) {
     super(device, name, {
+      '@type': 'VoltageProperty',
       type: 'number',
       unit: 'volt',
       multipleOf: 0.01,
