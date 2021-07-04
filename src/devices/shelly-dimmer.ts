@@ -5,11 +5,11 @@
  */
 
 import {Shelly} from 'shellies';
-import {SwitchProperty} from './properties/switch-property';
-import {BrightnessProperty} from './properties/brightness-property';
+import {SwitchProperty} from '../properties/switch-property';
+import {BrightnessProperty} from '../properties/brightness-property';
 import {ShellyMeter} from './shelly-meter';
 import {Adapter} from 'gateway-addon';
-import {debug} from './log';
+import {debug} from '../log';
 
 export class ShellyDimmer extends ShellyMeter {
     private switchProperty: SwitchProperty;

@@ -7,8 +7,8 @@
 import {Action, Adapter, Device, Property} from 'gateway-addon';
 import {Action as ActionSchema, Any} from 'gateway-addon/lib/schema';
 import {Shelly} from 'shellies';
-import {debug} from './log';
-import {TemperatureProperty} from './properties/temperature-property';
+import {debug} from '../log';
+import {TemperatureProperty} from '../properties/temperature-property';
 
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};

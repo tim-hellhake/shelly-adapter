@@ -7,12 +7,12 @@
 import {Shelly} from 'shellies';
 import {Adapter} from 'gateway-addon';
 import {ShellyDevice} from './shelly-device';
-import {SwitchProperty} from './properties/switch-property';
-import {MainSwitchProperty} from './properties/main-switch-property';
-import {TemperatureProperty} from './properties/temperature-property';
-import {InputProperty} from './properties/input-property';
-import {HumidityProperty} from './properties/humidity-property';
-import {VoltageProperty} from './properties/voltage-property';
+import {SwitchProperty} from '../properties/switch-property';
+import {MainSwitchProperty} from '../properties/main-switch-property';
+import {TemperatureProperty} from '../properties/temperature-property';
+import {InputProperty} from '../properties/input-property';
+import {HumidityProperty} from '../properties/humidity-property';
+import {VoltageProperty} from '../properties/voltage-property';
 
 export class ShellyUni extends ShellyDevice {
 

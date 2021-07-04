@@ -6,13 +6,13 @@
 
 import {Adapter} from 'gateway-addon';
 import {Shelly} from 'shellies';
-import {BatteryProperty} from './properties/battery-property';
-import {IlluminanceProperty} from './properties/illuminance-property';
-import {OpenProperty} from './properties/open-property';
+import {BatteryProperty} from '../properties/battery-property';
+import {IlluminanceProperty} from '../properties/illuminance-property';
+import {OpenProperty} from '../properties/open-property';
 import {ShellyDevice} from './shelly-device';
-import {TemperatureProperty} from './properties/temperature-property';
-import {VibrationProperty} from './properties/vibration-property';
-import {TiltProperty} from './properties/tilt-property';
+import {TemperatureProperty} from '../properties/temperature-property';
+import {VibrationProperty} from '../properties/vibration-property';
+import {TiltProperty} from '../properties/tilt-property';
 
 export class ShellyDoorWindow2 extends ShellyDevice {
   constructor(adapter: Adapter, device: Shelly) {

@@ -8,11 +8,11 @@ import {networkInterfaces} from 'os';
 import {Adapter, AddonManagerProxy} from 'gateway-addon';
 import shellies from 'shellies';
 import {Config} from './config';
-import {ShellyDimmer} from './shelly-dimmer';
-import {ShellyDoorWindow2} from './shelly-door-window-2';
-import {ShellyHT} from './shelly-ht';
-import {ShellySwitch} from './shelly-switch';
-import {ShellyUni} from './shelly-uni';
+import {ShellyDimmer} from './devices/shelly-dimmer';
+import {ShellyDoorWindow2} from './devices/shelly-door-window-2';
+import {ShellyHT} from './devices/shelly-ht';
+import {ShellySwitch} from './devices/shelly-switch';
+import {ShellyUni} from './devices/shelly-uni';
 import {debug} from './log';
 
 export class ShellyAdapter extends Adapter {

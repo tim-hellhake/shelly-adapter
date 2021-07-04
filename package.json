@@ -24,6 +24,13 @@
     "LICENSE",
     "SHA256SUMS",
     "manifest.json",
+    "lib/devices/shelly-device.js",
+    "lib/devices/shelly-dimmer.js",
+    "lib/devices/shelly-door-window-2.js",
+    "lib/devices/shelly-ht.js",
+    "lib/devices/shelly-meter.js",
+    "lib/devices/shelly-switch.js",
+    "lib/devices/shelly-uni.js",
     "lib/properties/battery-property.js",
     "lib/properties/brightness-property.js",
     "lib/properties/humidity-property.js",
@@ -41,14 +48,7 @@
     "lib/properties/voltage-property.js",
     "lib/index.js",
     "lib/log.js",
-    "lib/shelly-adapter.js",
-    "lib/shelly-device.js",
-    "lib/shelly-dimmer.js",
-    "lib/shelly-door-window-2.js",
-    "lib/shelly-ht.js",
-    "lib/shelly-meter.js",
-    "lib/shelly-switch.js",
-    "lib/shelly-uni.js"    
+    "lib/shelly-adapter.js"
   ],
   "dependencies": {
     "shellies": "^1.5.0"
