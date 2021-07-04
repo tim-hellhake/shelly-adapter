@@ -5,15 +5,13 @@
  */
 
 import {Property} from 'gateway-addon';
-import {ShellyDevice} from './shelly-device';
+import {ShellyDevice} from '../shelly-device';
 
-export class TemperatureProperty extends Property<number> {
+export class VibrationProperty extends Property<boolean> {
   constructor(device: ShellyDevice, name: string, title: string) {
     super(device, name, {
-      '@type': 'TemperatureProperty',
-      type: 'number',
-      unit: 'degree celsius',
-      multipleOf: 0.01,
+      '@type': 'BooleanProperty',
+      type: 'boolean',
       title,
       readOnly: true,
     });

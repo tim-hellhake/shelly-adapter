@@ -5,16 +5,17 @@
  */
 
 import {Property} from 'gateway-addon';
-import {ShellyDevice} from './shelly-device';
+import {ShellyDevice} from '../shelly-device';
 
-export class VoltageProperty extends Property<number> {
+export class TiltProperty extends Property<number> {
   constructor(device: ShellyDevice, name: string, title: string) {
     super(device, name, {
-      '@type': 'VoltageProperty',
-      type: 'number',
-      unit: 'volt',
-      multipleOf: 0.01,
-      title,
+      type: 'integer',
+      minimum: 0,
+      maximum: 180,
+      title: title,
+      description: 'Shelly tilt degrees',
+      unit: '°',
       readOnly: true,
     });
   }

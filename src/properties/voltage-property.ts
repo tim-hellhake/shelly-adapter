@@ -5,13 +5,16 @@
  */
 
 import {Property} from 'gateway-addon';
-import {ShellyDevice} from './shelly-device';
+import {ShellyDevice} from '../shelly-device';
 
-export class OpenProperty extends Property<boolean> {
-  constructor(device: ShellyDevice, name: string) {
+export class VoltageProperty extends Property<number> {
+  constructor(device: ShellyDevice, name: string, title: string) {
     super(device, name, {
-      '@type': 'OpenProperty',
-      type: 'boolean',
+      '@type': 'VoltageProperty',
+      type: 'number',
+      unit: 'volt',
+      multipleOf: 0.01,
+      title,
       readOnly: true,
     });
   }

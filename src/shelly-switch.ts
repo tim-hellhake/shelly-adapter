@@ -5,9 +5,9 @@
  */
 
 import {Shelly} from 'shellies';
-import {SwitchProperty} from './switch-property';
-import {MainSwitchProperty} from './main-switch-property';
-import {RollerPositionProperty} from './roller-position-property';
+import {SwitchProperty} from './properties/switch-property';
+import {MainSwitchProperty} from './properties/main-switch-property';
+import {RollerPositionProperty} from './properties/roller-position-property';
 import {ShellyMeter} from './shelly-meter';
 import {Adapter} from 'gateway-addon';
 

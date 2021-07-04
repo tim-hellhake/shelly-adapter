@@ -6,10 +6,10 @@
 
 import {Adapter} from 'gateway-addon';
 import {Shelly} from 'shellies';
-import {BatteryProperty} from './battery-property';
-import {HumidityProperty} from './humidity-property';
+import {BatteryProperty} from './properties/battery-property';
+import {HumidityProperty} from './properties/humidity-property';
 import {ShellyDevice} from './shelly-device';
-import {TemperatureProperty} from './temperature-property';
+import {TemperatureProperty} from './properties/temperature-property';
 
 export class ShellyHT extends ShellyDevice {
   constructor(adapter: Adapter, device: Shelly) {

@@ -5,18 +5,15 @@
  */
 
 import {Property} from 'gateway-addon';
-import {ShellyDevice} from './shelly-device';
+import {ShellyDevice} from '../shelly-device';
 
-export class BatteryProperty extends Property<number> {
+export class IlluminanceProperty extends Property<number> {
   constructor(device: ShellyDevice, name: string, title: string) {
     super(device, name, {
-      '@type': 'LevelProperty',
-      type: 'number',
-      unit: 'percent',
-      minimum: 0,
-      maximum: 100,
-      multipleOf: 0.1,
+      type: 'integer',
       title,
+      minimum: 0,
+      unit: 'lux',
       readOnly: true,
     });
   }

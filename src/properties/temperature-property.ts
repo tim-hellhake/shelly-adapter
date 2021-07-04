@@ -5,15 +5,16 @@
  */
 
 import {Property} from 'gateway-addon';
-import {ShellyDevice} from './shelly-device';
+import {ShellyDevice} from '../shelly-device';
 
-export class IlluminanceProperty extends Property<number> {
+export class TemperatureProperty extends Property<number> {
   constructor(device: ShellyDevice, name: string, title: string) {
     super(device, name, {
-      type: 'integer',
+      '@type': 'TemperatureProperty',
+      type: 'number',
+      unit: 'degree celsius',
+      multipleOf: 0.01,
       title,
-      minimum: 0,
-      unit: 'lux',
       readOnly: true,
     });
   }

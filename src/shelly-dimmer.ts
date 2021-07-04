@@ -5,8 +5,8 @@
  */
 
 import {Shelly} from 'shellies';
-import {SwitchProperty} from './switch-property';
-import {BrightnessProperty} from './brightness-property';
+import {SwitchProperty} from './properties/switch-property';
+import {BrightnessProperty} from './properties/brightness-property';
 import {ShellyMeter} from './shelly-meter';
 import {Adapter} from 'gateway-addon';
 import {debug} from './log';

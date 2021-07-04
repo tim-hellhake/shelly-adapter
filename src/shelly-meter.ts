@@ -6,8 +6,8 @@
 
 import {Adapter} from 'gateway-addon';
 import {Shelly} from 'shellies';
-import {MainPowerProperty} from './main-power-property';
-import {PowerProperty} from './power-property';
+import {MainPowerProperty} from './properties/main-power-property';
+import {PowerProperty} from './properties/power-property';
 import {ShellyDevice} from './shelly-device';
 
 export class ShellyMeter extends ShellyDevice {
