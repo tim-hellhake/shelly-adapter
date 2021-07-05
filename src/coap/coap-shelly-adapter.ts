@@ -57,27 +57,20 @@ export class CoapShellyAdapter extends Adapter {
 
         this.handleDeviceAdded(shellyDevice);
 
+        for (const [key, value] of Object.entries(device)) {
+          if (['boolean', 'number', 'string'].includes(typeof value)) {
+            debug(`Setting initial value of ${shellyDevice.getId()} ${key} to ${value}`);
+            setProperty(shellyDevice, key, value);
+          }
+        }
+
         device.on(
           'change',
           (prop: string, newValue: unknown, oldValue: unknown) => {
             debug(
               `${device.id} ${prop} changed from ${oldValue} to ${newValue}`);
 
-            let actualName = prop;
-
-            if (prop === 'deviceTemperature') {
-              actualName = 'internalTemperature';
-            }
-
-            if (prop.match(/power\d+/)) {
-              actualName = prop.replace('power', 'powerMeter');
-            }
-
-            const property = shellyDevice.findProperty(actualName);
-
-            if (property) {
-              property.setCachedValueAndNotify(newValue as Any);
-            } else {
+            if (!setProperty(shellyDevice, prop, newValue)) {
               console.warn(`No property for ${prop} found`);
             }
           });
@@ -180,4 +173,30 @@ export class CoapShellyAdapter extends Adapter {
 
     return null;
   }
+}
+
+function setProperty(device: ShellyDevice, name: string, value: unknown): boolean {
+  const actualName = fixName(name);
+
+  const property = device.findProperty(actualName);
+
+  if (property) {
+    property.setCachedValueAndNotify(value as Any);
+
+    return true;
+  }
+
+  return false;
+}
+
+function fixName(prop: string) {
+  if (prop === 'deviceTemperature') {
+    return 'internalTemperature';
+  }
+
+  if (prop.match(/power\d+/)) {
+    return prop.replace('power', 'powerMeter');
+  }
+
+  return prop;
 }
