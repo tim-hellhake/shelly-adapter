@@ -4,28 +4,30 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import {Shelly} from 'shellies';
 import {SwitchProperty} from '../properties/switch-property';
 import {BrightnessProperty} from '../properties/brightness-property';
-import {ShellyMeter} from './shelly-meter';
 import {Adapter} from 'gateway-addon';
 import {debug} from '../log';
+import {ShellyController} from '../shelly-controller';
+import {OverheatableDevice} from './overheatable-device';
 
-export class ShellyDimmer extends ShellyMeter {
+export class ShellyDimmer extends OverheatableDevice {
     private switchProperty: SwitchProperty;
 
     private brightnessProperty: BrightnessProperty;
 
-    constructor(adapter: Adapter, device: Shelly) {
-      super(adapter, device);
+    constructor(adapter: Adapter, id: string, controller: ShellyController) {
+      super(adapter, id);
       this['@context'] = 'https://iot.mozilla.org/schemas/';
       this['@type'].push('Light');
+
+      this.addPowermeters(1);
 
       this.switchProperty = new SwitchProperty(
         this, 'switch', 'Switch', true, async (value) => {
           const brightness = await this.brightnessProperty.getValue();
           debug(`setWhite(${brightness}, ${value})`);
-          device.setWhite(brightness, value);
+          controller.setWhite(brightness, value);
         });
 
       this.addProperty(this.switchProperty);
@@ -34,7 +36,7 @@ export class ShellyDimmer extends ShellyMeter {
         this, 'brightness', async (value) => {
           const switchValue = await this.switchProperty.getValue();
           debug(`setWhite(${value}, ${switchValue})`);
-          device.setWhite(value, switchValue);
+          controller.setWhite(value, switchValue);
         });
 
       this.addProperty(this.brightnessProperty);

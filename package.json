@@ -24,13 +24,27 @@
     "LICENSE",
     "SHA256SUMS",
     "manifest.json",
+
+    "lib/coap/coap-shelly-adapter.js",
+    "lib/coap/shellies.d.js",
+
+    "lib/devices/overheatable-device.js",
+    "lib/devices/shelly-1.js",
+    "lib/devices/shelly-1pm.js",
+    "lib/devices/shelly-2-relay.js",
+    "lib/devices/shelly-2-roller.js",
+    "lib/devices/shelly-3em.js",
+    "lib/devices/shelly-4-pro.js",
+    "lib/devices/shelly-25-relay.js",
     "lib/devices/shelly-device.js",
     "lib/devices/shelly-dimmer.js",
     "lib/devices/shelly-door-window-2.js",
+    "lib/devices/shelly-em.js",
     "lib/devices/shelly-ht.js",
-    "lib/devices/shelly-meter.js",
-    "lib/devices/shelly-switch.js",
+    "lib/devices/shelly-plug-s.js",
+    "lib/devices/shelly-plug.js",
     "lib/devices/shelly-uni.js",
+
     "lib/properties/battery-property.js",
     "lib/properties/brightness-property.js",
     "lib/properties/humidity-property.js",
@@ -46,9 +60,10 @@
     "lib/properties/tilt-property.js",
     "lib/properties/vibration-property.js",
     "lib/properties/voltage-property.js",
+
     "lib/index.js",
     "lib/log.js",
-    "lib/shelly-adapter.js"
+    "lib/shelly-controller.js"
   ],
   "dependencies": {
     "shellies": "^1.5.0"

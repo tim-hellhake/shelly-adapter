@@ -5,38 +5,19 @@
  */
 
 import {Adapter} from 'gateway-addon';
-import {Shelly} from 'shellies';
 import {BatteryProperty} from '../properties/battery-property';
 import {HumidityProperty} from '../properties/humidity-property';
 import {ShellyDevice} from './shelly-device';
 import {TemperatureProperty} from '../properties/temperature-property';
 
 export class ShellyHT extends ShellyDevice {
-  constructor(adapter: Adapter, device: Shelly) {
-    super(adapter, device);
+  constructor(adapter: Adapter, id: string) {
+    super(adapter, id);
     this['@type'].push('TemperatureSensor');
     this['@type'].push('HumiditySensor');
 
-    const temperature = new TemperatureProperty(
-      this, 'temperature', 'Temperature');
-    this.addProperty(temperature);
-
-    if (device.temperature) {
-      temperature.setCachedValueAndNotify(device.temperature);
-    }
-
-    const humidity = new HumidityProperty(this, 'humidity', 'Humidity');
-    this.addProperty(humidity);
-
-    if (device.humidity) {
-      humidity.setCachedValueAndNotify(device.humidity);
-    }
-
-    const battery = new BatteryProperty(this, 'battery', 'Battery');
-    this.addProperty(battery);
-
-    if (device.battery) {
-      battery.setCachedValueAndNotify(device.battery);
-    }
+    this.addProperty(new TemperatureProperty(this, 'temperature', 'Temperature'));
+    this.addProperty(new HumidityProperty(this, 'humidity', 'Humidity'));
+    this.addProperty(new BatteryProperty(this, 'battery', 'Battery'));
   }
 }

@@ -4,11 +4,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import {Property} from 'gateway-addon';
-import {ShellyDevice} from '../devices/shelly-device';
+import {Property, Device} from 'gateway-addon';
 
 export class VoltageProperty extends Property<number> {
-  constructor(device: ShellyDevice, name: string, title: string) {
+  constructor(device: Device, name: string, title: string) {
     super(device, name, {
       '@type': 'VoltageProperty',
       type: 'number',

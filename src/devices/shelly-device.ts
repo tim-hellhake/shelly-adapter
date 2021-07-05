@@ -4,51 +4,62 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
  */
 
-import {Action, Adapter, Device, Property} from 'gateway-addon';
-import {Action as ActionSchema, Any} from 'gateway-addon/lib/schema';
-import {Shelly} from 'shellies';
+import {Action, Adapter, Device} from 'gateway-addon';
+import {Action as ActionSchema} from 'gateway-addon/lib/schema';
 import {debug} from '../log';
-import {TemperatureProperty} from '../properties/temperature-property';
+import {MainPowerProperty} from '../properties/main-power-property';
+import {MainSwitchProperty} from '../properties/main-switch-property';
+import {PowerProperty} from '../properties/power-property';
+import {SwitchProperty} from '../properties/switch-property';
+import {ShellyController} from '../shelly-controller';
 
 export class ShellyDevice extends Device {
     private callbacks: { [key: string]: () => void } = {};
 
-    private propertyByAlias: Record<string, Property<Any>> = {};
-
-    constructor(adapter: Adapter, device: Shelly) {
-      super(adapter, device.id);
+    constructor(adapter: Adapter, id: string) {
+      super(adapter, id);
       this['@context'] = 'https://iot.mozilla.org/schemas/';
       this['@type'] = [];
-      this.setTitle(`${device.constructor.name} (${device.id})`);
+      this.setTitle(`${this.constructor.name} (${id})`);
+    }
 
-      device.on(
-        'change',
-        (prop: string, newValue: Any, oldValue: Any) => {
-          debug(
-            `${device.id} ${prop} changed from ${oldValue} to ${newValue}`);
+    protected addRelays(count: number, controller: ShellyController): void {
+      this['@type'].push('SmartPlug');
 
-          const property =
-          this.propertyByAlias[prop] ?? this.findProperty(prop);
+      if (count == 1) {
+        this.addProperty(new SwitchProperty(
+          this, 'relay0', 'Relay', true, (value) => controller.setRelay(0, value)));
+      } else {
+        const mainSwitchProperty = new MainSwitchProperty(
+          this, 'relay', 'All', true, (value) => {
+            for (let i = 0; i < count; i++) {
+              controller.setRelay(i, value);
+            }
+          });
 
-          if (property) {
-            property.setCachedValueAndNotify(newValue);
-          } else {
-            console.warn(`No property for ${prop} found`);
-          }
-        });
+        this.addProperty(mainSwitchProperty);
 
-      if (device.deviceTemperature) {
-        console.log(`Detected deviceTemperature property`);
-        const property = new TemperatureProperty(
-          this, 'internalTemperature', 'Device temperature');
-        this.addPropertyWithAlias('deviceTemperature', property);
+        for (let i = 0; i < count; i++) {
+          this.addProperty(new SwitchProperty(
+            this, `relay${i}`, `Relay ${i}`, false,
+            (value) => controller.setRelay(i, value), mainSwitchProperty));
+        }
       }
     }
 
-    protected addPropertyWithAlias(
-      shellyProperty: string, property: Property<Any>): void {
-      this.addProperty(property);
-      this.propertyByAlias[shellyProperty] = property;
+    protected addPowermeters(count: number): void {
+      if (count == 1) {
+        this.addProperty(new PowerProperty(this, `powerMeter0`, `Power`, true));
+      } else {
+        const mainPowerMeter = new MainPowerProperty(this, 'power', 'Power all');
+
+        this.addProperty(mainPowerMeter);
+
+        for (let i = 0; i < count; i++) {
+          this.addProperty(new PowerProperty(
+            this, `powerMeter${i}`, `Power ${i}`, false, mainPowerMeter));
+        }
+      }
     }
 
     protected addCallbackAction(

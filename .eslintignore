@@ -1,2 +1,2 @@
 src/config.d.ts
-src/shellies.d.ts
+src/coap/shellies.d.ts

@@ -7,7 +7,7 @@
 import {AddonManagerProxy, Database} from 'gateway-addon';
 import {Config} from './config';
 import {debugLogs} from './log';
-import {ShellyAdapter} from './shelly-adapter';
+import {CoapShellyAdapter} from './coap/coap-shelly-adapter';
 
 export = async function(addonManager: AddonManagerProxy,
                         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,5 +21,5 @@ export = async function(addonManager: AddonManagerProxy,
   const config = <Config><unknown> await db.loadConfig();
   await db.close();
   debugLogs(config.debugLogs ?? false);
-  new ShellyAdapter(addonManager, id, config, (error: string) => errorCallback(id, error));
+  new CoapShellyAdapter(addonManager, id, config, (error: string) => errorCallback(id, error));
 }
