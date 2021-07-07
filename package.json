@@ -1,7 +1,7 @@
 {
   "name": "shelly-adapter",
   "display_name": "Shelly",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Connect your shelly devices",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,10 +24,8 @@
     "LICENSE",
     "SHA256SUMS",
     "manifest.json",
-
     "lib/coap/coap-shelly-adapter.js",
     "lib/coap/shellies.d.js",
-
     "lib/devices/overheatable-device.js",
     "lib/devices/shelly-1.js",
     "lib/devices/shelly-1pm.js",
@@ -44,9 +42,7 @@
     "lib/devices/shelly-plug-s.js",
     "lib/devices/shelly-plug.js",
     "lib/devices/shelly-uni.js",
-
     "lib/mqtt/mqtt-shelly-adapter.js",
-
     "lib/properties/battery-property.js",
     "lib/properties/brightness-property.js",
     "lib/properties/humidity-property.js",
@@ -62,7 +58,6 @@
     "lib/properties/tilt-property.js",
     "lib/properties/vibration-property.js",
     "lib/properties/voltage-property.js",
-
     "lib/index.js",
     "lib/log.js",
     "lib/shelly-controller.js"
