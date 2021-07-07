@@ -8,6 +8,7 @@ import {AddonManagerProxy, Database} from 'gateway-addon';
 import {Config} from './config';
 import {debugLogs} from './log';
 import {CoapShellyAdapter} from './coap/coap-shelly-adapter';
+import {MqttShellyAdapter} from './mqtt/mqtt-shelly-adapter';
 
 export = async function(addonManager: AddonManagerProxy,
                         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -22,4 +23,10 @@ export = async function(addonManager: AddonManagerProxy,
   await db.close();
   debugLogs(config.debugLogs ?? false);
   new CoapShellyAdapter(addonManager, id, config, (error: string) => errorCallback(id, error));
+
+  const {enableMqtt} = config;
+
+  if (enableMqtt) {
+    new MqttShellyAdapter(addonManager, id, config, (error: string) => errorCallback(id, error));
+  }
 }

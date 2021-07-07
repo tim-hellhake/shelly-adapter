@@ -35,6 +35,14 @@
         "networkInterface": {
           "type": "string",
           "title": "The interface on which should be listened for multicast traffic. Leave it empty if you want to listen on all interfaces."
+        },
+        "enableMqtt": {
+          "type": "boolean",
+          "title": "Enable mqtt support"
+        },
+        "mqttBroker": {
+          "type": "string",
+          "title": "The mqtt broker (defaults to localhost)"
         }
       }
     }
