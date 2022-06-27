@@ -28,6 +28,7 @@
     "lib/coap/shellies.d.js",
     "lib/devices/overheatable-device.js",
     "lib/devices/shelly-1.js",
+    "lib/devices/shelly-1l-relay.js",
     "lib/devices/shelly-1pm.js",
     "lib/devices/shelly-2-relay.js",
     "lib/devices/shelly-2-roller.js",
