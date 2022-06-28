@@ -17,6 +17,7 @@ import {ShellyDevice} from '../devices/shelly-device';
 import {Any} from 'gateway-addon/lib/schema';
 import {Shelly25Relay} from '../devices/shelly-25-relay';
 import {Shelly1} from '../devices/shelly-1';
+import {Shelly1L} from '../devices/shelly-1l-relay';
 import {Shelly1PM} from '../devices/shelly-1pm';
 import {Shelly2Relay} from '../devices/shelly-2-relay';
 import {Shelly3EM} from '../devices/shelly-3em';
@@ -127,6 +128,9 @@ export class CoapShellyAdapter extends Adapter {
       }
       case 'Shelly1': {
         return new Shelly1(this, device.id, device);
+      }
+      case 'Shelly1L': {
+        return new Shelly1L(this, device.id, device);
       }
       case 'Shelly1PM': {
         return new Shelly1PM(this, device.id, device);
